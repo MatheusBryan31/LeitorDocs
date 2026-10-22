@@ -4,5 +4,8 @@ O IF de Almenara, em período de cadastro de algum eventou ou período de matrí
 
 De início, o projeto lerá documentos e terá a função de distinguir, dos documentos recebidos, quais são certidões de nascimento, certidões de casamento e uma terceira classe que será a previsão de documentos não identificados(sejam eles fotos embaçadas, muito tremidas ou escuras) ou de documentos diferentes de uma certidão de nascimento e de casamento.
 
+Antes da criação do modelo, é necessário realizar a busca de dados e tratar o dataset.
+Nesse víes, peguei 30 imagens de cada classe e elaborei um código que criasse mais 5 imagens de cada - com o ângulo e clareza diferentes - para que assim fortificasse o dataset com variabilidade de imagens. O nome desta técnica é Data Augmentation, que consiste em pegar uma imagem que recriá-la de outros ângulos e tons.
+
 
 (O LEIA-ME será melhorado. Por enquanto, este rascunho ajudará a manter um norte)
