@@ -17,6 +17,7 @@ CLASSES = ["nascimento", "casamento", "outros"]
 # Extensões permitidas
 EXTENSOES = [".jpg", ".jpeg", ".png"]
 
+
 # ===================================
 # FUNÇÃO PARA ROTACIONAR IMAGENS
 # ===================================
@@ -24,10 +25,11 @@ EXTENSOES = [".jpg", ".jpeg", ".png"]
 def rotacionar(imagem, angulo):
     return imagem.rotate(
         angulo,
-        expand = True,
-        resample = Image.Resampling.BICUBIC,
-        fillcolor = "white"
+        expand=True,
+        resample=Image.Resampling.BICUBIC,
+        fillcolor="white"
     )
+
 
 # ===================================
 # FUNÇÃO PARA ALTERAR O BRILHO
@@ -37,21 +39,28 @@ def alterar_brilho(imagem, fator):
     ajuste = ImageEnhance.Brightness(imagem)
     return ajuste.enhance(fator)
 
+
 # ===================================
 # FUNÇÃO PARA SALVAR IMAGENS
 # ===================================
 
 def salvar_imagem(imagem, pasta_destino, classe, contador, tipo):
+
     nome_arquivo = f"{classe}_{contador}_{tipo}.jpg"
+
     caminho = pasta_destino / nome_arquivo
-    imagem.save(caminho, "JPEG", quality = 95)
+
+    imagem.save(caminho, "JPEG", quality=95)
+
     return caminho
+
 
 # ===================================
 # FUNÇÃO PARA PROCESSAR UMA CLASSE
 # ===================================
 
 def processar_classe(classe):
+
     print(f"\nProcessando classe: {classe.upper()}")
 
     # Define as pastas automaticamente
@@ -64,7 +73,7 @@ def processar_classe(classe):
         return 0
 
     # Cria a pasta de destino
-    pasta_destino.mkdir(parents = True, exists_ok = True)
+    pasta_destino.mkdir(parents=True, exist_ok=True)
 
     # Busca os arquivos de imagem
     arquivos = sorted([
@@ -78,14 +87,16 @@ def processar_classe(classe):
     if not arquivos:
         print("Nenhuma imagem encontrada.")
         return 0
+
     contador = 1
     total_gerado = 0
 
     # Percorre todas as imagens
     for arquivo_imagem in arquivos:
+
         try:
             with Image.open(arquivo_imagem) as imagem:
-                
+
                 # Converte para RGB
                 original = imagem.convert("RGB")
 
@@ -100,6 +111,7 @@ def processar_classe(classe):
                     contador,
                     "original"
                 )
+
                 total_gerado += 1
 
                 # ===================================
@@ -107,6 +119,7 @@ def processar_classe(classe):
                 # ===================================
 
                 rotacionada_esquerda = rotacionar(original, 8)
+
                 salvar_imagem(
                     rotacionada_esquerda,
                     pasta_destino,
@@ -114,6 +127,7 @@ def processar_classe(classe):
                     contador,
                     "rotacao_positiva"
                 )
+
                 total_gerado += 1
 
                 # ===================================
@@ -121,6 +135,7 @@ def processar_classe(classe):
                 # ===================================
 
                 rotacionada_direita = rotacionar(original, -8)
+
                 salvar_imagem(
                     rotacionada_direita,
                     pasta_destino,
@@ -128,12 +143,15 @@ def processar_classe(classe):
                     contador,
                     "rotacao_negativa"
                 )
+
                 total_gerado += 1
 
                 # ===================================
                 # BRILHO +20%
                 # ===================================
+
                 mais_clara = alterar_brilho(original, 1.2)
+
                 salvar_imagem(
                     mais_clara,
                     pasta_destino,
@@ -141,6 +159,7 @@ def processar_classe(classe):
                     contador,
                     "mais_clara"
                 )
+
                 total_gerado += 1
 
                 # ===================================
@@ -148,6 +167,7 @@ def processar_classe(classe):
                 # ===================================
 
                 mais_escura = alterar_brilho(original, 0.8)
+
                 salvar_imagem(
                     mais_escura,
                     pasta_destino,
@@ -155,11 +175,8 @@ def processar_classe(classe):
                     contador,
                     "mais_escura"
                 )
+
                 total_gerado += 1
-
-                print(f"Imagem processada: {arquivo_imagem.name}")
-
-                contador += 1
 
                 print(f"Imagem processada: {arquivo_imagem.name}")
 
@@ -167,16 +184,19 @@ def processar_classe(classe):
 
         except Exception as erro:
             print(f"Erro ao processar {arquivo_imagem.name}: {erro}")
-        
-        print(f"Total gerado para {classe}: {total_gerado}")
 
-        return total_gerado
+    # IMPORTANTE: fora do laço FOR
+    print(f"Total gerado para {classe}: {total_gerado}")
+
+    return total_gerado
+
 
 # ===================================
 # FUNÇÃO PRINCIPAL
 # ===================================
 
 def main():
+
     print("===================================")
     print(" GERADOR DE DATASET - APRENDIZADO DE MÁQUINA")
     print("===================================")
@@ -185,16 +205,21 @@ def main():
 
     # Percorre automaticamente as três classes
     for classe in CLASSES:
+
         quantidade = processar_classe(classe)
+
         total_geral += quantidade
 
     print("\n===================================")
     print(" PROCESSAMENTO FINALIZADO")
     print("===================================")
+
     print(f"Total geral de imagens: {total_geral}")
 
+
 # ===================================
-# EZECUÇÃO DO PROGRAMA
+# EXECUÇÃO DO PROGRAMA
 # ===================================
+
 if __name__ == "__main__":
     main()
