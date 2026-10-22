@@ -146,3 +146,55 @@ def processar_classe(classe):
                 # ===================================
                 # BRILHO -20%
                 # ===================================
+
+                mais_escura = alterar_brilho(original, 0.8)
+                salvar_imagem(
+                    mais_escura,
+                    pasta_destino,
+                    classe,
+                    contador,
+                    "mais_escura"
+                )
+                total_gerado += 1
+
+                print(f"Imagem processada: {arquivo_imagem.name}")
+
+                contador += 1
+
+                print(f"Imagem processada: {arquivo_imagem.name}")
+
+                contador += 1
+
+        except Exception as erro:
+            print(f"Erro ao processar {arquivo_imagem.name}: {erro}")
+        
+        print(f"Total gerado para {classe}: {total_gerado}")
+
+        return total_gerado
+
+# ===================================
+# FUNÇÃO PRINCIPAL
+# ===================================
+
+def main():
+    print("===================================")
+    print(" GERADOR DE DATASET - APRENDIZADO DE MÁQUINA")
+    print("===================================")
+
+    total_geral = 0
+
+    # Percorre automaticamente as três classes
+    for classe in CLASSES:
+        quantidade = processar_classe(classe)
+        total_geral += quantidade
+
+    print("\n===================================")
+    print(" PROCESSAMENTO FINALIZADO")
+    print("===================================")
+    print(f"Total geral de imagens: {total_geral}")
+
+# ===================================
+# EZECUÇÃO DO PROGRAMA
+# ===================================
+if __name__ == "__main__":
+    main()
