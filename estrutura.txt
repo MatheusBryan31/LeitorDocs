@@ -1,0 +1,572 @@
+Listagem de caminhos de pasta
+O número de série do volume é 5085-110F
+C:.
+¦   estrutura.txt
+¦   gerador_imagens.py
+¦   README.md
+¦   teste.gitignore
+¦   
++---src
+    +---assets
+        +---imagens
+            +---casamento
+            ¦   +---casamentoDestino
+            ¦   ¦       casamento_10_mais_clara.jpg
+            ¦   ¦       casamento_10_mais_escura.jpg
+            ¦   ¦       casamento_10_original.jpg
+            ¦   ¦       casamento_10_rotacao_negativa.jpg
+            ¦   ¦       casamento_10_rotacao_positiva.jpg
+            ¦   ¦       casamento_11_mais_clara.jpg
+            ¦   ¦       casamento_11_mais_escura.jpg
+            ¦   ¦       casamento_11_original.jpg
+            ¦   ¦       casamento_11_rotacao_negativa.jpg
+            ¦   ¦       casamento_11_rotacao_positiva.jpg
+            ¦   ¦       casamento_12_mais_clara.jpg
+            ¦   ¦       casamento_12_mais_escura.jpg
+            ¦   ¦       casamento_12_original.jpg
+            ¦   ¦       casamento_12_rotacao_negativa.jpg
+            ¦   ¦       casamento_12_rotacao_positiva.jpg
+            ¦   ¦       casamento_13_mais_clara.jpg
+            ¦   ¦       casamento_13_mais_escura.jpg
+            ¦   ¦       casamento_13_original.jpg
+            ¦   ¦       casamento_13_rotacao_negativa.jpg
+            ¦   ¦       casamento_13_rotacao_positiva.jpg
+            ¦   ¦       casamento_14_mais_clara.jpg
+            ¦   ¦       casamento_14_mais_escura.jpg
+            ¦   ¦       casamento_14_original.jpg
+            ¦   ¦       casamento_14_rotacao_negativa.jpg
+            ¦   ¦       casamento_14_rotacao_positiva.jpg
+            ¦   ¦       casamento_15_mais_clara.jpg
+            ¦   ¦       casamento_15_mais_escura.jpg
+            ¦   ¦       casamento_15_original.jpg
+            ¦   ¦       casamento_15_rotacao_negativa.jpg
+            ¦   ¦       casamento_15_rotacao_positiva.jpg
+            ¦   ¦       casamento_16_mais_clara.jpg
+            ¦   ¦       casamento_16_mais_escura.jpg
+            ¦   ¦       casamento_16_original.jpg
+            ¦   ¦       casamento_16_rotacao_negativa.jpg
+            ¦   ¦       casamento_16_rotacao_positiva.jpg
+            ¦   ¦       casamento_17_mais_clara.jpg
+            ¦   ¦       casamento_17_mais_escura.jpg
+            ¦   ¦       casamento_17_original.jpg
+            ¦   ¦       casamento_17_rotacao_negativa.jpg
+            ¦   ¦       casamento_17_rotacao_positiva.jpg
+            ¦   ¦       casamento_18_mais_clara.jpg
+            ¦   ¦       casamento_18_mais_escura.jpg
+            ¦   ¦       casamento_18_original.jpg
+            ¦   ¦       casamento_18_rotacao_negativa.jpg
+            ¦   ¦       casamento_18_rotacao_positiva.jpg
+            ¦   ¦       casamento_19_mais_clara.jpg
+            ¦   ¦       casamento_19_mais_escura.jpg
+            ¦   ¦       casamento_19_original.jpg
+            ¦   ¦       casamento_19_rotacao_negativa.jpg
+            ¦   ¦       casamento_19_rotacao_positiva.jpg
+            ¦   ¦       casamento_1_mais_clara.jpg
+            ¦   ¦       casamento_1_mais_escura.jpg
+            ¦   ¦       casamento_1_original.jpg
+            ¦   ¦       casamento_1_rotacao_negativa.jpg
+            ¦   ¦       casamento_1_rotacao_positiva.jpg
+            ¦   ¦       casamento_20_mais_clara.jpg
+            ¦   ¦       casamento_20_mais_escura.jpg
+            ¦   ¦       casamento_20_original.jpg
+            ¦   ¦       casamento_20_rotacao_negativa.jpg
+            ¦   ¦       casamento_20_rotacao_positiva.jpg
+            ¦   ¦       casamento_21_mais_clara.jpg
+            ¦   ¦       casamento_21_mais_escura.jpg
+            ¦   ¦       casamento_21_original.jpg
+            ¦   ¦       casamento_21_rotacao_negativa.jpg
+            ¦   ¦       casamento_21_rotacao_positiva.jpg
+            ¦   ¦       casamento_22_mais_clara.jpg
+            ¦   ¦       casamento_22_mais_escura.jpg
+            ¦   ¦       casamento_22_original.jpg
+            ¦   ¦       casamento_22_rotacao_negativa.jpg
+            ¦   ¦       casamento_22_rotacao_positiva.jpg
+            ¦   ¦       casamento_23_mais_clara.jpg
+            ¦   ¦       casamento_23_mais_escura.jpg
+            ¦   ¦       casamento_23_original.jpg
+            ¦   ¦       casamento_23_rotacao_negativa.jpg
+            ¦   ¦       casamento_23_rotacao_positiva.jpg
+            ¦   ¦       casamento_24_mais_clara.jpg
+            ¦   ¦       casamento_24_mais_escura.jpg
+            ¦   ¦       casamento_24_original.jpg
+            ¦   ¦       casamento_24_rotacao_negativa.jpg
+            ¦   ¦       casamento_24_rotacao_positiva.jpg
+            ¦   ¦       casamento_25_mais_clara.jpg
+            ¦   ¦       casamento_25_mais_escura.jpg
+            ¦   ¦       casamento_25_original.jpg
+            ¦   ¦       casamento_25_rotacao_negativa.jpg
+            ¦   ¦       casamento_25_rotacao_positiva.jpg
+            ¦   ¦       casamento_26_mais_clara.jpg
+            ¦   ¦       casamento_26_mais_escura.jpg
+            ¦   ¦       casamento_26_original.jpg
+            ¦   ¦       casamento_26_rotacao_negativa.jpg
+            ¦   ¦       casamento_26_rotacao_positiva.jpg
+            ¦   ¦       casamento_27_mais_clara.jpg
+            ¦   ¦       casamento_27_mais_escura.jpg
+            ¦   ¦       casamento_27_original.jpg
+            ¦   ¦       casamento_27_rotacao_negativa.jpg
+            ¦   ¦       casamento_27_rotacao_positiva.jpg
+            ¦   ¦       casamento_28_mais_clara.jpg
+            ¦   ¦       casamento_28_mais_escura.jpg
+            ¦   ¦       casamento_28_original.jpg
+            ¦   ¦       casamento_28_rotacao_negativa.jpg
+            ¦   ¦       casamento_28_rotacao_positiva.jpg
+            ¦   ¦       casamento_29_mais_clara.jpg
+            ¦   ¦       casamento_29_mais_escura.jpg
+            ¦   ¦       casamento_29_original.jpg
+            ¦   ¦       casamento_29_rotacao_negativa.jpg
+            ¦   ¦       casamento_29_rotacao_positiva.jpg
+            ¦   ¦       casamento_2_mais_clara.jpg
+            ¦   ¦       casamento_2_mais_escura.jpg
+            ¦   ¦       casamento_2_original.jpg
+            ¦   ¦       casamento_2_rotacao_negativa.jpg
+            ¦   ¦       casamento_2_rotacao_positiva.jpg
+            ¦   ¦       casamento_30_mais_clara.jpg
+            ¦   ¦       casamento_30_mais_escura.jpg
+            ¦   ¦       casamento_30_original.jpg
+            ¦   ¦       casamento_30_rotacao_negativa.jpg
+            ¦   ¦       casamento_30_rotacao_positiva.jpg
+            ¦   ¦       casamento_3_mais_clara.jpg
+            ¦   ¦       casamento_3_mais_escura.jpg
+            ¦   ¦       casamento_3_original.jpg
+            ¦   ¦       casamento_3_rotacao_negativa.jpg
+            ¦   ¦       casamento_3_rotacao_positiva.jpg
+            ¦   ¦       casamento_4_mais_clara.jpg
+            ¦   ¦       casamento_4_mais_escura.jpg
+            ¦   ¦       casamento_4_original.jpg
+            ¦   ¦       casamento_4_rotacao_negativa.jpg
+            ¦   ¦       casamento_4_rotacao_positiva.jpg
+            ¦   ¦       casamento_5_mais_clara.jpg
+            ¦   ¦       casamento_5_mais_escura.jpg
+            ¦   ¦       casamento_5_original.jpg
+            ¦   ¦       casamento_5_rotacao_negativa.jpg
+            ¦   ¦       casamento_5_rotacao_positiva.jpg
+            ¦   ¦       casamento_6_mais_clara.jpg
+            ¦   ¦       casamento_6_mais_escura.jpg
+            ¦   ¦       casamento_6_original.jpg
+            ¦   ¦       casamento_6_rotacao_negativa.jpg
+            ¦   ¦       casamento_6_rotacao_positiva.jpg
+            ¦   ¦       casamento_7_mais_clara.jpg
+            ¦   ¦       casamento_7_mais_escura.jpg
+            ¦   ¦       casamento_7_original.jpg
+            ¦   ¦       casamento_7_rotacao_negativa.jpg
+            ¦   ¦       casamento_7_rotacao_positiva.jpg
+            ¦   ¦       casamento_8_mais_clara.jpg
+            ¦   ¦       casamento_8_mais_escura.jpg
+            ¦   ¦       casamento_8_original.jpg
+            ¦   ¦       casamento_8_rotacao_negativa.jpg
+            ¦   ¦       casamento_8_rotacao_positiva.jpg
+            ¦   ¦       casamento_9_mais_clara.jpg
+            ¦   ¦       casamento_9_mais_escura.jpg
+            ¦   ¦       casamento_9_original.jpg
+            ¦   ¦       casamento_9_rotacao_negativa.jpg
+            ¦   ¦       casamento_9_rotacao_positiva.jpg
+            ¦   ¦       
+            ¦   +---casamentoOrigem
+            ¦           certidaoCasamento1.png
+            ¦           certidaoCasamento10.png
+            ¦           certidaoCasamento11.png
+            ¦           certidaoCasamento12.png
+            ¦           certidaoCasamento13.png
+            ¦           certidaoCasamento14.png
+            ¦           certidaoCasamento15.png
+            ¦           certidaoCasamento16.png
+            ¦           certidaoCasamento17.png
+            ¦           certidaoCasamento18.png
+            ¦           certidaoCasamento19.png
+            ¦           certidaoCasamento2.png
+            ¦           certidaoCasamento20.png
+            ¦           certidaoCasamento21.png
+            ¦           certidaoCasamento22.png
+            ¦           certidaoCasamento23.png
+            ¦           certidaoCasamento24.png
+            ¦           certidaoCasamento25.png
+            ¦           certidaoCasamento26.png
+            ¦           certidaoCasamento27.png
+            ¦           certidaoCasamento28.png
+            ¦           certidaoCasamento29.png
+            ¦           certidaoCasamento3.png
+            ¦           certidaoCasamento30.png
+            ¦           certidaoCasamento4.png
+            ¦           certidaoCasamento5.png
+            ¦           certidaoCasamento6.png
+            ¦           certidaoCasamento7.png
+            ¦           certidaoCasamento8.png
+            ¦           certidaoCasamento9.png
+            ¦           
+            +---nascimento
+            ¦   +---nascimentoDestino
+            ¦   ¦       nascimento_10_mais_clara.jpg
+            ¦   ¦       nascimento_10_mais_escura.jpg
+            ¦   ¦       nascimento_10_original.jpg
+            ¦   ¦       nascimento_10_rotacao_negativa.jpg
+            ¦   ¦       nascimento_10_rotacao_positiva.jpg
+            ¦   ¦       nascimento_11_mais_clara.jpg
+            ¦   ¦       nascimento_11_mais_escura.jpg
+            ¦   ¦       nascimento_11_original.jpg
+            ¦   ¦       nascimento_11_rotacao_negativa.jpg
+            ¦   ¦       nascimento_11_rotacao_positiva.jpg
+            ¦   ¦       nascimento_12_mais_clara.jpg
+            ¦   ¦       nascimento_12_mais_escura.jpg
+            ¦   ¦       nascimento_12_original.jpg
+            ¦   ¦       nascimento_12_rotacao_negativa.jpg
+            ¦   ¦       nascimento_12_rotacao_positiva.jpg
+            ¦   ¦       nascimento_13_mais_clara.jpg
+            ¦   ¦       nascimento_13_mais_escura.jpg
+            ¦   ¦       nascimento_13_original.jpg
+            ¦   ¦       nascimento_13_rotacao_negativa.jpg
+            ¦   ¦       nascimento_13_rotacao_positiva.jpg
+            ¦   ¦       nascimento_14_mais_clara.jpg
+            ¦   ¦       nascimento_14_mais_escura.jpg
+            ¦   ¦       nascimento_14_original.jpg
+            ¦   ¦       nascimento_14_rotacao_negativa.jpg
+            ¦   ¦       nascimento_14_rotacao_positiva.jpg
+            ¦   ¦       nascimento_15_mais_clara.jpg
+            ¦   ¦       nascimento_15_mais_escura.jpg
+            ¦   ¦       nascimento_15_original.jpg
+            ¦   ¦       nascimento_15_rotacao_negativa.jpg
+            ¦   ¦       nascimento_15_rotacao_positiva.jpg
+            ¦   ¦       nascimento_16_mais_clara.jpg
+            ¦   ¦       nascimento_16_mais_escura.jpg
+            ¦   ¦       nascimento_16_original.jpg
+            ¦   ¦       nascimento_16_rotacao_negativa.jpg
+            ¦   ¦       nascimento_16_rotacao_positiva.jpg
+            ¦   ¦       nascimento_17_mais_clara.jpg
+            ¦   ¦       nascimento_17_mais_escura.jpg
+            ¦   ¦       nascimento_17_original.jpg
+            ¦   ¦       nascimento_17_rotacao_negativa.jpg
+            ¦   ¦       nascimento_17_rotacao_positiva.jpg
+            ¦   ¦       nascimento_18_mais_clara.jpg
+            ¦   ¦       nascimento_18_mais_escura.jpg
+            ¦   ¦       nascimento_18_original.jpg
+            ¦   ¦       nascimento_18_rotacao_negativa.jpg
+            ¦   ¦       nascimento_18_rotacao_positiva.jpg
+            ¦   ¦       nascimento_19_mais_clara.jpg
+            ¦   ¦       nascimento_19_mais_escura.jpg
+            ¦   ¦       nascimento_19_original.jpg
+            ¦   ¦       nascimento_19_rotacao_negativa.jpg
+            ¦   ¦       nascimento_19_rotacao_positiva.jpg
+            ¦   ¦       nascimento_1_mais_clara.jpg
+            ¦   ¦       nascimento_1_mais_escura.jpg
+            ¦   ¦       nascimento_1_original.jpg
+            ¦   ¦       nascimento_1_rotacao_negativa.jpg
+            ¦   ¦       nascimento_1_rotacao_positiva.jpg
+            ¦   ¦       nascimento_20_mais_clara.jpg
+            ¦   ¦       nascimento_20_mais_escura.jpg
+            ¦   ¦       nascimento_20_original.jpg
+            ¦   ¦       nascimento_20_rotacao_negativa.jpg
+            ¦   ¦       nascimento_20_rotacao_positiva.jpg
+            ¦   ¦       nascimento_21_mais_clara.jpg
+            ¦   ¦       nascimento_21_mais_escura.jpg
+            ¦   ¦       nascimento_21_original.jpg
+            ¦   ¦       nascimento_21_rotacao_negativa.jpg
+            ¦   ¦       nascimento_21_rotacao_positiva.jpg
+            ¦   ¦       nascimento_22_mais_clara.jpg
+            ¦   ¦       nascimento_22_mais_escura.jpg
+            ¦   ¦       nascimento_22_original.jpg
+            ¦   ¦       nascimento_22_rotacao_negativa.jpg
+            ¦   ¦       nascimento_22_rotacao_positiva.jpg
+            ¦   ¦       nascimento_23_mais_clara.jpg
+            ¦   ¦       nascimento_23_mais_escura.jpg
+            ¦   ¦       nascimento_23_original.jpg
+            ¦   ¦       nascimento_23_rotacao_negativa.jpg
+            ¦   ¦       nascimento_23_rotacao_positiva.jpg
+            ¦   ¦       nascimento_24_mais_clara.jpg
+            ¦   ¦       nascimento_24_mais_escura.jpg
+            ¦   ¦       nascimento_24_original.jpg
+            ¦   ¦       nascimento_24_rotacao_negativa.jpg
+            ¦   ¦       nascimento_24_rotacao_positiva.jpg
+            ¦   ¦       nascimento_25_mais_clara.jpg
+            ¦   ¦       nascimento_25_mais_escura.jpg
+            ¦   ¦       nascimento_25_original.jpg
+            ¦   ¦       nascimento_25_rotacao_negativa.jpg
+            ¦   ¦       nascimento_25_rotacao_positiva.jpg
+            ¦   ¦       nascimento_26_mais_clara.jpg
+            ¦   ¦       nascimento_26_mais_escura.jpg
+            ¦   ¦       nascimento_26_original.jpg
+            ¦   ¦       nascimento_26_rotacao_negativa.jpg
+            ¦   ¦       nascimento_26_rotacao_positiva.jpg
+            ¦   ¦       nascimento_27_mais_clara.jpg
+            ¦   ¦       nascimento_27_mais_escura.jpg
+            ¦   ¦       nascimento_27_original.jpg
+            ¦   ¦       nascimento_27_rotacao_negativa.jpg
+            ¦   ¦       nascimento_27_rotacao_positiva.jpg
+            ¦   ¦       nascimento_28_mais_clara.jpg
+            ¦   ¦       nascimento_28_mais_escura.jpg
+            ¦   ¦       nascimento_28_original.jpg
+            ¦   ¦       nascimento_28_rotacao_negativa.jpg
+            ¦   ¦       nascimento_28_rotacao_positiva.jpg
+            ¦   ¦       nascimento_29_mais_clara.jpg
+            ¦   ¦       nascimento_29_mais_escura.jpg
+            ¦   ¦       nascimento_29_original.jpg
+            ¦   ¦       nascimento_29_rotacao_negativa.jpg
+            ¦   ¦       nascimento_29_rotacao_positiva.jpg
+            ¦   ¦       nascimento_2_mais_clara.jpg
+            ¦   ¦       nascimento_2_mais_escura.jpg
+            ¦   ¦       nascimento_2_original.jpg
+            ¦   ¦       nascimento_2_rotacao_negativa.jpg
+            ¦   ¦       nascimento_2_rotacao_positiva.jpg
+            ¦   ¦       nascimento_30_mais_clara.jpg
+            ¦   ¦       nascimento_30_mais_escura.jpg
+            ¦   ¦       nascimento_30_original.jpg
+            ¦   ¦       nascimento_30_rotacao_negativa.jpg
+            ¦   ¦       nascimento_30_rotacao_positiva.jpg
+            ¦   ¦       nascimento_3_mais_clara.jpg
+            ¦   ¦       nascimento_3_mais_escura.jpg
+            ¦   ¦       nascimento_3_original.jpg
+            ¦   ¦       nascimento_3_rotacao_negativa.jpg
+            ¦   ¦       nascimento_3_rotacao_positiva.jpg
+            ¦   ¦       nascimento_4_mais_clara.jpg
+            ¦   ¦       nascimento_4_mais_escura.jpg
+            ¦   ¦       nascimento_4_original.jpg
+            ¦   ¦       nascimento_4_rotacao_negativa.jpg
+            ¦   ¦       nascimento_4_rotacao_positiva.jpg
+            ¦   ¦       nascimento_5_mais_clara.jpg
+            ¦   ¦       nascimento_5_mais_escura.jpg
+            ¦   ¦       nascimento_5_original.jpg
+            ¦   ¦       nascimento_5_rotacao_negativa.jpg
+            ¦   ¦       nascimento_5_rotacao_positiva.jpg
+            ¦   ¦       nascimento_6_mais_clara.jpg
+            ¦   ¦       nascimento_6_mais_escura.jpg
+            ¦   ¦       nascimento_6_original.jpg
+            ¦   ¦       nascimento_6_rotacao_negativa.jpg
+            ¦   ¦       nascimento_6_rotacao_positiva.jpg
+            ¦   ¦       nascimento_7_mais_clara.jpg
+            ¦   ¦       nascimento_7_mais_escura.jpg
+            ¦   ¦       nascimento_7_original.jpg
+            ¦   ¦       nascimento_7_rotacao_negativa.jpg
+            ¦   ¦       nascimento_7_rotacao_positiva.jpg
+            ¦   ¦       nascimento_8_mais_clara.jpg
+            ¦   ¦       nascimento_8_mais_escura.jpg
+            ¦   ¦       nascimento_8_original.jpg
+            ¦   ¦       nascimento_8_rotacao_negativa.jpg
+            ¦   ¦       nascimento_8_rotacao_positiva.jpg
+            ¦   ¦       nascimento_9_mais_clara.jpg
+            ¦   ¦       nascimento_9_mais_escura.jpg
+            ¦   ¦       nascimento_9_original.jpg
+            ¦   ¦       nascimento_9_rotacao_negativa.jpg
+            ¦   ¦       nascimento_9_rotacao_positiva.jpg
+            ¦   ¦       
+            ¦   +---nascimentoOrigem
+            ¦           certidaoNascimento1.png
+            ¦           certidaoNascimento10.png
+            ¦           certidaoNascimento11.png
+            ¦           certidaoNascimento12.png
+            ¦           certidaoNascimento13.png
+            ¦           certidaoNascimento14.png
+            ¦           certidaoNascimento15.png
+            ¦           certidaoNascimento16.png
+            ¦           certidaoNascimento17.png
+            ¦           certidaoNascimento18.png
+            ¦           certidaoNascimento19.png
+            ¦           certidaoNascimento2.png
+            ¦           certidaoNascimento20.png
+            ¦           certidaoNascimento21.png
+            ¦           certidaoNascimento22.png
+            ¦           certidaoNascimento23.png
+            ¦           certidaoNascimento24.png
+            ¦           certidaoNascimento25.png
+            ¦           certidaoNascimento26.png
+            ¦           certidaoNascimento27.png
+            ¦           certidaoNascimento28.png
+            ¦           certidaoNascimento29.png
+            ¦           certidaoNascimento3.png
+            ¦           certidaoNascimento30.png
+            ¦           certidaoNascimento4.png
+            ¦           certidaoNascimento5.png
+            ¦           certidaoNascimento6.png
+            ¦           certidaoNascimento7.png
+            ¦           certidaoNascimento8.png
+            ¦           certidaoNascimento9.png
+            ¦           
+            +---outros
+                +---outrosDestino
+                ¦       outros_10_mais_clara.jpg
+                ¦       outros_10_mais_escura.jpg
+                ¦       outros_10_original.jpg
+                ¦       outros_10_rotacao_negativa.jpg
+                ¦       outros_10_rotacao_positiva.jpg
+                ¦       outros_11_mais_clara.jpg
+                ¦       outros_11_mais_escura.jpg
+                ¦       outros_11_original.jpg
+                ¦       outros_11_rotacao_negativa.jpg
+                ¦       outros_11_rotacao_positiva.jpg
+                ¦       outros_12_mais_clara.jpg
+                ¦       outros_12_mais_escura.jpg
+                ¦       outros_12_original.jpg
+                ¦       outros_12_rotacao_negativa.jpg
+                ¦       outros_12_rotacao_positiva.jpg
+                ¦       outros_13_mais_clara.jpg
+                ¦       outros_13_mais_escura.jpg
+                ¦       outros_13_original.jpg
+                ¦       outros_13_rotacao_negativa.jpg
+                ¦       outros_13_rotacao_positiva.jpg
+                ¦       outros_14_mais_clara.jpg
+                ¦       outros_14_mais_escura.jpg
+                ¦       outros_14_original.jpg
+                ¦       outros_14_rotacao_negativa.jpg
+                ¦       outros_14_rotacao_positiva.jpg
+                ¦       outros_15_mais_clara.jpg
+                ¦       outros_15_mais_escura.jpg
+                ¦       outros_15_original.jpg
+                ¦       outros_15_rotacao_negativa.jpg
+                ¦       outros_15_rotacao_positiva.jpg
+                ¦       outros_16_mais_clara.jpg
+                ¦       outros_16_mais_escura.jpg
+                ¦       outros_16_original.jpg
+                ¦       outros_16_rotacao_negativa.jpg
+                ¦       outros_16_rotacao_positiva.jpg
+                ¦       outros_17_mais_clara.jpg
+                ¦       outros_17_mais_escura.jpg
+                ¦       outros_17_original.jpg
+                ¦       outros_17_rotacao_negativa.jpg
+                ¦       outros_17_rotacao_positiva.jpg
+                ¦       outros_18_mais_clara.jpg
+                ¦       outros_18_mais_escura.jpg
+                ¦       outros_18_original.jpg
+                ¦       outros_18_rotacao_negativa.jpg
+                ¦       outros_18_rotacao_positiva.jpg
+                ¦       outros_19_mais_clara.jpg
+                ¦       outros_19_mais_escura.jpg
+                ¦       outros_19_original.jpg
+                ¦       outros_19_rotacao_negativa.jpg
+                ¦       outros_19_rotacao_positiva.jpg
+                ¦       outros_1_mais_clara.jpg
+                ¦       outros_1_mais_escura.jpg
+                ¦       outros_1_original.jpg
+                ¦       outros_1_rotacao_negativa.jpg
+                ¦       outros_1_rotacao_positiva.jpg
+                ¦       outros_20_mais_clara.jpg
+                ¦       outros_20_mais_escura.jpg
+                ¦       outros_20_original.jpg
+                ¦       outros_20_rotacao_negativa.jpg
+                ¦       outros_20_rotacao_positiva.jpg
+                ¦       outros_21_mais_clara.jpg
+                ¦       outros_21_mais_escura.jpg
+                ¦       outros_21_original.jpg
+                ¦       outros_21_rotacao_negativa.jpg
+                ¦       outros_21_rotacao_positiva.jpg
+                ¦       outros_22_mais_clara.jpg
+                ¦       outros_22_mais_escura.jpg
+                ¦       outros_22_original.jpg
+                ¦       outros_22_rotacao_negativa.jpg
+                ¦       outros_22_rotacao_positiva.jpg
+                ¦       outros_23_mais_clara.jpg
+                ¦       outros_23_mais_escura.jpg
+                ¦       outros_23_original.jpg
+                ¦       outros_23_rotacao_negativa.jpg
+                ¦       outros_23_rotacao_positiva.jpg
+                ¦       outros_24_mais_clara.jpg
+                ¦       outros_24_mais_escura.jpg
+                ¦       outros_24_original.jpg
+                ¦       outros_24_rotacao_negativa.jpg
+                ¦       outros_24_rotacao_positiva.jpg
+                ¦       outros_25_mais_clara.jpg
+                ¦       outros_25_mais_escura.jpg
+                ¦       outros_25_original.jpg
+                ¦       outros_25_rotacao_negativa.jpg
+                ¦       outros_25_rotacao_positiva.jpg
+                ¦       outros_26_mais_clara.jpg
+                ¦       outros_26_mais_escura.jpg
+                ¦       outros_26_original.jpg
+                ¦       outros_26_rotacao_negativa.jpg
+                ¦       outros_26_rotacao_positiva.jpg
+                ¦       outros_27_mais_clara.jpg
+                ¦       outros_27_mais_escura.jpg
+                ¦       outros_27_original.jpg
+                ¦       outros_27_rotacao_negativa.jpg
+                ¦       outros_27_rotacao_positiva.jpg
+                ¦       outros_28_mais_clara.jpg
+                ¦       outros_28_mais_escura.jpg
+                ¦       outros_28_original.jpg
+                ¦       outros_28_rotacao_negativa.jpg
+                ¦       outros_28_rotacao_positiva.jpg
+                ¦       outros_29_mais_clara.jpg
+                ¦       outros_29_mais_escura.jpg
+                ¦       outros_29_original.jpg
+                ¦       outros_29_rotacao_negativa.jpg
+                ¦       outros_29_rotacao_positiva.jpg
+                ¦       outros_2_mais_clara.jpg
+                ¦       outros_2_mais_escura.jpg
+                ¦       outros_2_original.jpg
+                ¦       outros_2_rotacao_negativa.jpg
+                ¦       outros_2_rotacao_positiva.jpg
+                ¦       outros_30_mais_clara.jpg
+                ¦       outros_30_mais_escura.jpg
+                ¦       outros_30_original.jpg
+                ¦       outros_30_rotacao_negativa.jpg
+                ¦       outros_30_rotacao_positiva.jpg
+                ¦       outros_31_mais_clara.jpg
+                ¦       outros_31_mais_escura.jpg
+                ¦       outros_31_original.jpg
+                ¦       outros_31_rotacao_negativa.jpg
+                ¦       outros_31_rotacao_positiva.jpg
+                ¦       outros_3_mais_clara.jpg
+                ¦       outros_3_mais_escura.jpg
+                ¦       outros_3_original.jpg
+                ¦       outros_3_rotacao_negativa.jpg
+                ¦       outros_3_rotacao_positiva.jpg
+                ¦       outros_4_mais_clara.jpg
+                ¦       outros_4_mais_escura.jpg
+                ¦       outros_4_original.jpg
+                ¦       outros_4_rotacao_negativa.jpg
+                ¦       outros_4_rotacao_positiva.jpg
+                ¦       outros_5_mais_clara.jpg
+                ¦       outros_5_mais_escura.jpg
+                ¦       outros_5_original.jpg
+                ¦       outros_5_rotacao_negativa.jpg
+                ¦       outros_5_rotacao_positiva.jpg
+                ¦       outros_6_mais_clara.jpg
+                ¦       outros_6_mais_escura.jpg
+                ¦       outros_6_original.jpg
+                ¦       outros_6_rotacao_negativa.jpg
+                ¦       outros_6_rotacao_positiva.jpg
+                ¦       outros_7_mais_clara.jpg
+                ¦       outros_7_mais_escura.jpg
+                ¦       outros_7_original.jpg
+                ¦       outros_7_rotacao_negativa.jpg
+                ¦       outros_7_rotacao_positiva.jpg
+                ¦       outros_8_mais_clara.jpg
+                ¦       outros_8_mais_escura.jpg
+                ¦       outros_8_original.jpg
+                ¦       outros_8_rotacao_negativa.jpg
+                ¦       outros_8_rotacao_positiva.jpg
+                ¦       outros_9_mais_clara.jpg
+                ¦       outros_9_mais_escura.jpg
+                ¦       outros_9_original.jpg
+                ¦       outros_9_rotacao_negativa.jpg
+                ¦       outros_9_rotacao_positiva.jpg
+                ¦       
+                +---outrosOrigem
+                        outros1.jpg
+                        outros10.png
+                        outros11.png
+                        outros12.png
+                        outros13.png
+                        outros14.png
+                        outros15.png
+                        outros16.png
+                        outros17.png
+                        outros18.png
+                        outros19.png
+                        outros2.jpg
+                        outros20.png
+                        outros21.png
+                        outros22.png
+                        outros23.png
+                        outros24.png
+                        outros25.png
+                        outros26.png
+                        outros27.png
+                        outros28.png
+                        outros29.png
+                        outros3.jpg
+                        outros30.png
+                        outros31.jpeg
+                        outros4.jpg
+                        outros5.jpg
+                        outros6.png
+                        outros7.png
+                        outros8.png
+                        outros9.png
+                        

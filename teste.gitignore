@@ -89,3 +89,21 @@ from pathlib import Path
 - [ ] Integração com o fluxo de matrículas e inscrições
 
 > Este README está em desenvolvimento e será atualizado conforme o projeto avança.
+
+estrutura.txt
+│   gerador_imagens.py
+│   README.md
+│   teste.gitignore
+│
+└───src
+    └───assets
+        └───imagens
+            ├───casamento
+            │   ├───casamentoDestino
+            │   └───casamentoOrigem
+            ├───nascimento
+            │   ├───nascimentoDestino
+            │   └───nascimentoOrigem
+            └───outros
+                ├───outrosDestino
+                └───outrosOrigem
