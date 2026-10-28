@@ -16,3 +16,7 @@ Classificador de documentos com Machine Learn para automatizar a triagem de cert
 - [Status do projeto](#status-do-projeto)
 
 ---
+
+## Problema
+
+Nos períodos de cadastro em eventos, matrículas e inscrições, o Campus Almenara ainda analisa os documentos 
