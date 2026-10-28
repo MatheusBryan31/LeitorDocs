@@ -48,3 +48,11 @@ Antes da criação do modelo, foi necessário reunir e tratar os dados.
 
 - Python versão 3.13.17
 - [Pillow](https://pypi.org/project/pillow/): biblioteca para manupulação de imagens
+
+## Instalação
+
+Foi criado um ambiente para as bibliotecas do Python e posteriormente foi instalado o Pillow:
+
+```bash
+pip install Pillow
+```
