@@ -26,3 +26,11 @@ Surge, então, a necessidade de um sistema que resolva esse problema: um modelo 
 ## Objetivo
 
 Ler os documentos recebidos e distinguir, entre eles, quais são certidões de nascimento, quais são certidões de casamento e quais não se enquadram em nenhum dos dois casos.
+
+## Classes do modelo
+
+| Classe       | Descrição                                                                                             |
+| ------------ | ----------------------------------------------------------------------------------------------------- |
+| `nascimento` | Certidões de nascimento                                                                               |
+| `casamento`  | Certidões de casamento                                                                                |
+| `outros`     | Documentos não identificados (fotos borradas, tremidas ou escuras) ou diferentes de uma certidão      |
