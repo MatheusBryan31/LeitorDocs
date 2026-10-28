@@ -8,3 +8,11 @@ Classificador de documentos com Machine Learn para automatizar a triagem de cert
 
 - [Problema](#problema)
 - [Objetivo](#objetivo)
+- [Classes do modelo](#classes-do-modelo)
+- [Preparação do dataset](#preparação-do-dataset)
+- [Tecnologias utilizadas](#tecnologias-utilizadas)
+- [Instalação](#instalação)
+- [Como o código funciona](#como-o-código-funciona)
+- [Status do projeto](#status-do-projeto)
+
+---
