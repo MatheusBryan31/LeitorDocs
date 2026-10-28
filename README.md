@@ -56,3 +56,6 @@ Foi criado um ambiente para as bibliotecas do Python e posteriormente foi instal
 ```bash
 pip install Pillow
 ```
+
+## Como o código funciona
+
