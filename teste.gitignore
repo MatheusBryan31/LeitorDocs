@@ -1,253 +1,91 @@
-# 📑 LeitorDocs
-### Sistema Inteligente de Classificação de Documentos
+# LeitorDocs
 
-**Projeto acadêmico | Aprendizado de Máquina | Python**
-
----
-
-## 📌 Sobre o projeto
-
-O **LeitorDocs** é um projeto acadêmico de **Machine Learning
-(Aprendizado de Máquina)** que tem como objetivo desenvolver um
-modelo capaz de classificar automaticamente imagens de documentos.
-
-A proposta surgiu da necessidade de otimizar processos de análise
-documental, especialmente em instituições de ensino, como o
-**Instituto Federal do Norte de Minas Gerais — Campus Almenara**.
-
-O projeto encontra-se em desenvolvimento e, inicialmente, será
-responsável por distinguir três classes de documentos.
-
-### 🎯 Classes de classificação
-
-| Classe | Descrição |
-|:---:|---|
-| 📜 **Nascimento** | Imagens de certidões de nascimento. |
-| 💍 **Casamento** | Imagens de certidões de casamento. |
-| 📂 **Outros** | Documentos diferentes das duas classes anteriores e imagens de documentos ilegíveis. |
-
-> **📍 Observação:** A classe "Outros" reúne documentos que não
-> pertencem às duas primeiras categorias. Imagens ilegíveis também
-> poderão integrar essa classe, conforme os critérios definidos
-> para o dataset.
+Classificador de documentos com Machine Learning para automatizar a triagem de certidões no IF de Almenara.
 
 ---
 
-## 🚨 1. Problema identificado
+## Sumário
 
-Durante períodos de matrículas, inscrições e cadastros em eventos,
-instituições de ensino precisam analisar diversos documentos
-enviados pelos candidatos.
-
-Em determinados processos, essa análise é realizada manualmente
-por profissionais responsáveis, o que pode resultar em:
-
-- ⏳ **Elevado tempo de análise** dos documentos recebidos.
-- 📚 **Acúmulo de trabalho** em períodos de grande demanda.
-- 🔍 **Necessidade de conferência individual** dos arquivos.
-- ⚙️ **Dificuldade de automatização** da triagem documental.
-
-Diante desse cenário, surge a proposta de desenvolver um modelo
-de Aprendizado de Máquina capaz de auxiliar na identificação e
-classificação dos documentos recebidos.
-
-### 💡 Solução proposta
-
-Desenvolver um modelo de classificação de imagens que reconheça
-automaticamente as características visuais dos documentos e os
-organize conforme as três classes estabelecidas.
-
-**Fluxo esperado:**
-
-`📥 Documento recebido` → `🧠 Modelo de ML` → `📊 Classificação` → `📁 Categoria identificada`
+- [Problema](#problema)
+- [Objetivo](#objetivo)
+- [Classes do modelo](#classes-do-modelo)
+- [Preparação do dataset](#preparação-do-dataset)
+- [Tecnologias utilizadas](#tecnologias-utilizadas)
+- [Instalação](#instalação)
+- [Como o código funciona](#como-o-código-funciona)
+- [Status do projeto](#status-do-projeto)
 
 ---
 
-## 🛠️ 2. Elaboração do projeto
+## Problema
 
-O desenvolvimento do LeitorDocs foi dividido em etapas,
-começando pela construção e preparação do conjunto de dados.
+Nos períodos de cadastro em eventos, matrículas e inscrições, o IF de Almenara ainda analisa os documentos recebidos de forma **manual**, por meio de um profissional. Esse processo consome muito tempo.
 
-### 📊 2.1 Construção do Dataset
+Surge, então, a necessidade de um sistema que resolva esse problema: um modelo de **Machine Learning** capaz de analisar os documentos automaticamente.
 
-Antes de iniciar o treinamento do modelo, é necessário reunir
-imagens representativas de cada classe.
+## Objetivo
 
-Inicialmente, foram selecionadas **30 imagens originais por categoria**.
+Ler os documentos recebidos e distinguir, entre eles, quais são certidões de nascimento, quais são certidões de casamento e quais não se enquadram em nenhum dos dois casos.
 
-| Categoria | Imagens originais | Meta inicial |
-|---|:---:|:---:|
-| 📜 Nascimento | 30 | 100 |
-| 💍 Casamento | 30 | 100 |
-| 📂 Outros | 30 | 100 |
-| **Total** | **90** | **300** |
+## Classes do modelo
 
-Para ampliar a diversidade das imagens disponíveis, foi adotada
-uma técnica de processamento conhecida como **Data Augmentation**.
+| Classe       | Descrição                                                                                             |
+| ------------ | ----------------------------------------------------------------------------------------------------- |
+| `nascimento` | Certidões de nascimento                                                                               |
+| `casamento`  | Certidões de casamento                                                                                |
+| `outros`     | Documentos não identificados (fotos borradas, tremidas ou escuras) ou diferentes de uma certidão      |
 
-### 🖼️ 2.2 Data Augmentation
+## Preparação do dataset
 
-Data Augmentation é uma técnica utilizada no Aprendizado de Máquina
-para ampliar artificialmente a quantidade e a diversidade de dados
-de treinamento.
+Antes da criação do modelo, foi necessário reunir e tratar os dados.
 
-A técnica consiste em aplicar transformações sobre imagens
-existentes, produzindo novas versões sem alterar sua
-classificação original.
+- **Dados originais:** 30 imagens de cada classe.
+- **Data Augmentation:** para cada imagem original, são geradas 5 novas imagens com ângulo e clareza diferentes, aumentando a variabilidade do dataset.
 
-No LeitorDocs, foram consideradas transformações como:
+> **O que é Data Augmentation?** É a técnica de recriar uma imagem em outros ângulos e tons, ampliando o dataset sem a necessidade de coletar novos dados.
 
-- 🔄 **Rotação:** alteração do ângulo da imagem.
-- ☀️ **Brilho:** simulação de diferentes condições de iluminação.
-- 🎨 **Contraste:** modificação da diferença entre regiões claras e escuras.
+O processamento foi projetado para ser executado **de uma só vez para todas as classes**. Embora seja possível fazê-lo manualmente, isso geraria retrabalho. Automatizar o processo evita gasto excessivo de tempo e de processamento e facilita a **escalabilidade** e a **manutenção** do projeto, sobretudo em modelos com muitas classes.
 
-Essas transformações permitem que o modelo seja exposto a
-diferentes condições visuais durante o treinamento.
+## Tecnologias utilizadas
 
-> **🧠 Conceito importante:** O Data Augmentation pode contribuir
-> para a capacidade de generalização do modelo, mas não substitui
-> a coleta de imagens originais diversificadas.
+- Python
+- [Pillow](https://pypi.org/project/pillow/): biblioteca para manipulação de imagens
 
-### ⚙️ 2.3 Automatização do processamento
+## Instalação
 
-Para evitar a repetição de código, o processamento das imagens
-foi estruturado de maneira automatizada.
-
-Em vez de desenvolver um bloco de código para cada categoria,
-foi criada uma estrutura capaz de percorrer todas as classes
-e aplicar o mesmo conjunto de operações.
-
-**Vantagens dessa abordagem:**
-
-- ♻️ **Reutilização de código:** evita a duplicação de instruções.
-- 🚀 **Escalabilidade:** facilita a inclusão de novas categorias.
-- 🔧 **Manutenibilidade:** simplifica futuras alterações.
-- ⏱️ **Produtividade:** reduz o trabalho manual de processamento.
-
----
-
-## 💻 3. Memória de código
-
-Esta seção documenta as bibliotecas, estruturas e decisões
-utilizadas durante o desenvolvimento do projeto.
-
-O objetivo é manter um registro técnico do processo de
-aprendizagem e facilitar futuras consultas.
-
-### 📦 3.1 Preparação do ambiente
-
-Para realizar o processamento das imagens, foi utilizada a
-linguagem **Python**, juntamente com a biblioteca **Pillow**.
-
-A instalação pode ser realizada pelo terminal:
+Crie um ambiente para as bibliotecas do Python e instale o Pillow:
 
 ```bash
 pip install Pillow
 ```
 
-A biblioteca Pillow disponibiliza ferramentas para abrir,
-modificar e salvar imagens em diferentes formatos.
+## Como o código funciona
 
-### 📚 3.2 Bibliotecas utilizadas
+O script de geração de variações utiliza as seguintes bibliotecas:
 
 ```python
 from PIL import Image, ImageEnhance
 from pathlib import Path
 ```
 
-| Recurso | Responsabilidade |
-|---|---|
-| `Image` | Abrir, manipular e salvar imagens. |
-| `ImageEnhance` | Ajustar propriedades visuais, como brilho e contraste. |
-| `Path` | Manipular caminhos de arquivos e diretórios. |
+| Módulo          | Função                                                       |
+| --------------- | ------------------------------------------------------------ |
+| `Image`         | Abre, manipula e salva imagens                               |
+| `ImageEnhance`  | Altera propriedades visuais, como brilho e contraste         |
+| `Path`          | Trabalha com caminhos de arquivos e diretórios               |
 
-### 🧩 3.3 Organização da lógica
+### Lógica do programa
 
-O programa foi planejado para processar automaticamente
-as três classes do dataset.
+1. Uma lista recebe as três classes que o modelo irá prever: `nascimento`, `casamento` e `outros`.
+2. No método `main()`, a função `processar_classe()` percorre essa lista e executa o mesmo bloco de código para cada elemento, sem a necessidade de reescrever o código para cada classe.
+3. Os caminhos das pastas são obtidos automaticamente por variáveis.
 
-**Etapa 1 — Definição das classes**
+## Status do projeto
 
-Foi criada uma lista contendo as categorias que o
-modelo deverá identificar:
+- [x] Coleta das imagens originais
+- [x] Script de Data Augmentation
+- [ ] Treinamento do modelo
+- [ ] Avaliação do modelo
+- [ ] Integração com o fluxo de matrículas e inscrições
 
-```python
-classes = ["nascimento", "casamento", "outros"]
-```
-
-**Etapa 2 — Processamento automatizado**
-
-A função `main()` percorre a lista de classes e executa
-a função `processar_classe()` para cada categoria.
-
-```python
-def main():
-    for classe in classes:
-        processar_classe(classe)
-```
-
-**Etapa 3 — Reutilização da lógica**
-
-A função `processar_classe()` concentra as operações
-responsáveis por localizar e transformar as imagens
-de cada categoria.
-
-Essa organização permite reutilizar o mesmo processamento,
-independentemente da quantidade de classes existentes.
-
-> **📖 Registro de aprendizagem:** A utilização de funções
-> e estruturas de repetição contribui para a organização
-> do código, evitando a necessidade de escrever instruções
-> semelhantes para cada categoria.
-
----
-
-## 🧰 4. Tecnologias utilizadas
-
-| Tecnologia | Aplicação |
-|---|---|
-| 🐍 **Python** | Linguagem principal do projeto. |
-| 🖼️ **Pillow** | Processamento e transformação das imagens. |
-| 📁 **Pathlib** | Gerenciamento de caminhos e diretórios. |
-| 🧠 **Machine Learning** | Desenvolvimento do modelo de classificação. |
-| 📝 **Markdown** | Documentação técnica do projeto. |
-
----
-
-## 🚧 5. Status do desenvolvimento
-
-**🟡 Projeto em desenvolvimento**
-
-| Etapa | Situação |
-|---|:---:|
-| Definição do problema | ✅ |
-| Definição das classes | ✅ |
-| Coleta inicial de imagens | ✅ |
-| Desenvolvimento do Data Augmentation | 🔄 |
-| Organização do dataset | 🔄 |
-| Treinamento do modelo | ⏳ |
-| Avaliação dos resultados | ⏳ |
-
-**Legenda:** ✅ Concluído | 🔄 Em andamento | ⏳ Pendente
-
----
-
-## 🎓 6. Considerações
-
-O LeitorDocs representa uma aplicação prática dos conceitos
-estudados em Aprendizado de Máquina, envolvendo desde a
-preparação dos dados até o futuro treinamento e avaliação
-de um modelo de classificação.
-
-Além do desenvolvimento técnico, o projeto busca consolidar
-conhecimentos relacionados à programação em Python,
-manipulação de imagens, organização de código e
-documentação de software.
-
-> **📌 Nota:** Este README será atualizado conforme o avanço
-> do desenvolvimento, registrando novas implementações,
-> dificuldades encontradas e soluções adotadas.
-
----
-
-**📑 LeitorDocs — Aprendizado de Máquina aplicado à classificação documental.**
+> Este README está em desenvolvimento e será atualizado conforme o projeto avança.
