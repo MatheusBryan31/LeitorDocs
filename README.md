@@ -45,3 +45,5 @@ Antes da criação do modelo, foi necessário reunir e tratar os dados.
 > **O que é Data Augmentation?** É a técnica de recriar uma imagem em outros ângulos e tons, ampliando o dataset sem a necessidade de coletar novos dados.
 
 ## Tecnologias utilizadas
+
+- Python
