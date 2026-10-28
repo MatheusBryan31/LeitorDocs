@@ -77,3 +77,11 @@ from pathlib import Path
 1. Uma lista recebe as três classes que o modelo irá prever: `nascimento`, `casamento` e `outros`.
 2. No método `main()`, a função `processar_classe()` percorre essa lista e executa o mesmo bloco de código para cada elemento, sem a necessidade de reescrever o código para cada classe.
 3. Os caminhos das pastas são obtidos automaticamente por variáveis.
+
+## Status do projeto
+
+- [x] Coleta das imagens originais
+- [x] Script de Data Augmentation
+- [ ] Treinamento do modelo
+- [ ] Avaliação do modelo
+- [ ] Integração com o fluzo de matrículas
