@@ -34,3 +34,12 @@ Ler os documentos recebidos e distinguir, entre eles, quais são certidões de n
 | `nascimento` | Certidões de nascimento                                                                               |
 | `casamento`  | Certidões de casamento                                                                                |
 | `outros`     | Documentos não identificados (fotos borradas, tremidas ou escuras) ou diferentes de uma certidão      |
+
+## Preparação do dataset
+
+Antes da criação do modelo, foi necessário reunir e tratar os dados.
+
+- **Dados originais:** 30 imagens de cada classe.
+- **Data Augmentation:** Para cada imagem original, são geradas cinco novas imagens com ângulo e clareza diferentes, aumentando a variabilidade do dataset.
+
+> **O que é Data Augmentation?** É a técnica de recriar uma imagem em outros ângulos e tons, ampliando o dataset sem a necessidade de coletar novos dados.
