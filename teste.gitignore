@@ -1,4 +1,4 @@
-# # LeitorDocs
+# LeitorDocs
 
 Classificador de documentos com Machine Learning para automatizar a triagem de certidões no IF de Almenara.
 
@@ -45,11 +45,12 @@ Antes da criação do modelo, foi necessário reunir e tratar os dados.
 > **O que é Data Augmentation?** É a técnica de recriar uma imagem em outros ângulos e tons, ampliando o dataset sem a necessidade de coletar novos dados.
 
 O processamento foi projetado para ser executado **de uma só vez para todas as classes**. Embora seja possível fazê-lo manualmente, isso geraria retrabalho. Automatizar o processo evita gasto excessivo de tempo e de processamento e facilita a **escalabilidade** e a **manutenção** do projeto, sobretudo em modelos com muitas classes.
-
+((!!Está seção está a merce de adição!!))
 ## Tecnologias utilizadas
 
 - Python
 - [Pillow](https://pypi.org/project/pillow/): biblioteca para manipulação de imagens
+((!!Está seção está a merce de adição!!))
 
 ## Instalação
 
