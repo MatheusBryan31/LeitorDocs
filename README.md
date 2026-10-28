@@ -71,3 +71,9 @@ from pathlib import Path
 | `Image`         | Abre, manipula e salva imagens                               |
 | `ImageEnhance`  | Altera propriedades visuais, como brilho e contraste         |
 | `Path`          | Trabalha com caminhos de arquivos e diretórios               |
+
+### Lógica do programa
+
+1. Uma lista recebe as três classes que o modelo irá prever: `nascimento`, `casamento` e `outros`.
+2. No método `main()`, a função `processar_classe()` percorre essa lista e executa o mesmo bloco de código para cada elemento, sem a necessidade de reescrever o código para cada classe.
+3. Os caminhos das pastas são obtidos automaticamente por variáveis.
