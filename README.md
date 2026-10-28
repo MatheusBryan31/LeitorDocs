@@ -84,4 +84,6 @@ from pathlib import Path
 - [x] Script de Data Augmentation
 - [ ] Treinamento do modelo
 - [ ] Avaliação do modelo
-- [ ] Integração com o fluzo de matrículas
+- [ ] Integração com o fluxo de matrículas e inscrições
+
+> Este README está em desenvolvimento e será atualizado conforme o projeto avança.
