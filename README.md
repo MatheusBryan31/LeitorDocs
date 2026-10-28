@@ -59,3 +59,15 @@ pip install Pillow
 
 ## Como o código funciona
 
+O script de geração de variações utiliza as seguintes bibliotecas:
+
+```python
+from PIL import Image, ImageEnhance
+from pathlib import Path
+```
+
+| Módulo          | Função                                                       |
+| --------------- | ------------------------------------------------------------ |
+| `Image`         | Abre, manipula e salva imagens                               |
+| `ImageEnhance`  | Altera propriedades visuais, como brilho e contraste         |
+| `Path`          | Trabalha com caminhos de arquivos e diretórios               |

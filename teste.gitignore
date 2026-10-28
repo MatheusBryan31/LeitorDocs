@@ -59,7 +59,7 @@ Crie um ambiente para as bibliotecas do Python e instale o Pillow:
 ```bash
 pip install Pillow
 ```
-
+((!!Está seção está a merce de adição!!))
 ## Como o código funciona
 
 O script de geração de variações utiliza as seguintes bibliotecas:
@@ -74,7 +74,7 @@ from pathlib import Path
 | `Image`         | Abre, manipula e salva imagens                               |
 | `ImageEnhance`  | Altera propriedades visuais, como brilho e contraste         |
 | `Path`          | Trabalha com caminhos de arquivos e diretórios               |
-
+((!!Está seção está a merce de adição!!))
 ### Lógica do programa
 
 1. Uma lista recebe as três classes que o modelo irá prever: `nascimento`, `casamento` e `outros`.
