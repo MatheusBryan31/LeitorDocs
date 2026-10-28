@@ -49,6 +49,32 @@ Antes da criação do modelo, foi necessário reunir e tratar os dados.
 - Python versão 3.13.17
 - [Pillow](https://pypi.org/project/pillow/): biblioteca para manupulação de imagens
 
+## Estrutura de pastas
+
+```text
+LeitorDocs/
+├──src/
+|    └───assets/
+|        └───imagens/
+|            ├───casamento/
+|            │   ├───casamentoDestino/
+|            │   └───casamentoOrigem/
+|            ├───nascimento/
+|            │   ├───nascimentoDestino/
+|            │   └───nascimentoOrigem/
+|            └───outros/
+|                ├───outrosDestino/
+|                └───outrosOrigem/
+├── gerador_imagens.py
+├── README.md
+└── rascunho.gitignore
+```
+| Caminho              | Descrição                                                                 |
+| -------------------- | ------------------------------------------------------------------------- |
+| `dataset/original/`  | Imagens originais, organizadas em uma subpasta por classe                 |
+| `dataset/aumentado/` | Variações geradas pelo script, mantendo a mesma organização por classe    |
+| `data_augmentation.py` | Percorre cada classe e cria 5 novas imagens a partir de cada original   |
+
 ## Instalação
 
 Foi criado um ambiente para as bibliotecas do Python e posteriormente foi instalado o Pillow:
