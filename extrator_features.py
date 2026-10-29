@@ -141,7 +141,12 @@ def executar_ocr(padronizada):
 
         # conf = -1 indica que o bloco não é uma palavra (é só estrutura da página)
         if texto and conf >= 0:
-            palvras.append(texto)
+            palavras.append(texto)
             confiancas.append(conf)
     return " ".join(palavras), confiancas
 
+# ===================================
+# FUNÇÃO PARA CONTAR PALAVRAS CHAVE
+# ===================================
+def contar_palavras_chave(texto, palavras):
+    return sum(texto.count(palavra) for palavra in palavras)
