@@ -1,1 +1,5 @@
 Pillow
+numpy
+opencv-python
+pandas
+pytesseract
