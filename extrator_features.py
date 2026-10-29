@@ -55,3 +55,10 @@ PALAVRAS_CERTIDAO = [
 ]
 FRASE_NASCIMENTO = "certidao de nascimento"
 FRASE_CASAMENTO = "certidao de casamento"
+
+# ===================================
+# FUNÇÃO PARA LER UMA IMAGEM
+# ===================================
+def ler_imagem(caminho):
+    dados = np.fromfile(str(caminho), dtype=np.uint8)
+    return cv2.imdecode(dados, cv2.IMREAD_COLOR)
