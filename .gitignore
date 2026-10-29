@@ -435,3 +435,10 @@ def main():
 # ===================================
 if __name__ == "__main__":
     main()
+
+
+Pillow
+numpy
+opencv-python
+pandas
+pytesseract
