@@ -442,3 +442,4 @@ numpy
 opencv-python
 pandas
 pytesseract
+(!! Talvez tenha que adicionar essas bibliotecas no arquivo readme.md, Bryan!!)
