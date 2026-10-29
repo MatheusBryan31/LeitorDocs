@@ -68,7 +68,8 @@ LeitorDocs/
 |                └───outrosOrigem/
 ├── gerador_imagens.py
 ├── README.md
-└── rascunho.gitignore
+├── requirements.txt
+└── ba.gitignore
 ```
 | Caminho              | Descrição                                                                 |
 | -------------------- | ------------------------------------------------------------------------- |
