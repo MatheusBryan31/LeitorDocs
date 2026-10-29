@@ -11,6 +11,7 @@ Classificador de documentos com Machine Learn para automatizar a triagem de cert
 - [Classes do modelo](#classes-do-modelo)
 - [Preparação do dataset](#preparação-do-dataset)
 - [Tecnologias utilizadas](#tecnologias-utilizadas)
+- [Estrutura das pastas](#estrutura-das-pastas)
 - [Instalação](#instalação)
 - [Como o código funciona](#como-o-código-funciona)
 - [Status do projeto](#status-do-projeto)
@@ -49,7 +50,7 @@ Antes da criação do modelo, foi necessário reunir e tratar os dados.
 - Python versão 3.13.17
 - [Pillow](https://pypi.org/project/pillow/): biblioteca para manupulação de imagens
 
-## Estrutura de pastas
+## Estrutura das pastas
 
 ```text
 LeitorDocs/
