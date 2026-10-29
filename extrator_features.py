@@ -119,3 +119,29 @@ def extrair_features_visuais(original, padronizada):
         "prop_tinta": float(np.count_nonzero(tinta) / tinta.size),
     }
 
+# ===================================
+# OCR: LÊ O TEXTO E A CONFIANÇA DE CADA PALAVRA
+# ===================================
+def executar_ocr(padronizada):
+    cinza = cv2.cvtColor(padronizada, cv2.COLOR_BGR2GRAY)
+
+    dados = pytesseract.image_to_data(
+        cinza,
+        lang=IDIOMA_OCR,
+        output_type=Output.DICT,
+        timeout=TIMEOUT_OCR,
+    )
+
+    palavras = []
+    confiancas = []
+
+    for texto, conf in zip(dados["text"],dados["conf"]):
+        texto = texto.strip()
+        conf = float(conf)
+
+        # conf = -1 indica que o bloco não é uma palavra (é só estrutura da página)
+        if texto and conf >= 0:
+            palvras.append(texto)
+            confiancas.append(conf)
+    return " ".join(palavras), confiancas
+
