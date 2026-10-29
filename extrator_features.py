@@ -40,3 +40,18 @@ TIMEOUT_OCR = 90
 
 if Path(CAMINHO_TESSERACT).exists():
     pytesseract.pytesseract.tesseract_cmd = CAMINHO_TESSERACT
+
+# ===================================
+# PALAVRAS-CHAVE
+# ===================================
+PALAVRAS_NASCIMENTO = [
+    "nascimento", "nascido", "nascida", "filiacao", "avos", "gemeo",
+]
+PALAVRAS_CASAMENTO = [
+    "casamento", "casado", "casada", "conjugue", "conjuges", "regime de bens", "nubente", "nubentes",
+]
+PALAVRAS_CERTIDAO = [
+    "certidao", "registro civil", "matricula", "cartorio", "oficial de registro", "republica federativa",
+]
+FRASE_NASCIMENTO = "certidao de nascimento"
+FRASE_CASAMENTO = "certidao de casamento"
