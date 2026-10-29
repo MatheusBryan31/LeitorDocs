@@ -62,3 +62,17 @@ FRASE_CASAMENTO = "certidao de casamento"
 def ler_imagem(caminho):
     dados = np.fromfile(str(caminho), dtype=np.uint8)
     return cv2.imdecode(dados, cv2.IMREAD_COLOR)
+
+# ===================================
+# FUNÇÃO PARA PADRONIZAR A LARGURA
+# ===================================
+def padronizar_largura(imagem, largura_alvo):
+    altura, largura = imagem.shape[:2]
+    if largura == largura_alvo:
+        return imagem
+    escala = largura_alvo / largura
+    nova_altura = int(altura * escala)
+
+    # INTER_AREA é o melhor para reduzir; INTER_CUBIC é o melhor para ampliar
+    interpolacao = cv2.INTER_AREA if escala < 1 else cv2.INTER_CUBIC
+    return cv2.resize(imagem, (largura_alvo, nova_altura), interpolation=interpolacao)
