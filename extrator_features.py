@@ -150,3 +150,26 @@ def executar_ocr(padronizada):
 # ===================================
 def contar_palavras_chave(texto, palavras):
     return sum(texto.count(palavra) for palavra in palavras)
+
+# ===================================
+# FEATURES DE TEXTO (a partir do OCR)
+# ===================================
+def extrair_features_texto(texto_bruto, confiancas):
+    texto = normalizar_texto(texto_bruto)
+    sem_espacos = texto.replace(" ", "")
+    total_caracteres = len(sem_espacos)
+    total_letras = sum(c.isalpha() for c in sem_espaco)
+
+    return {
+        "ocr_n_caracteres": total_caracteres,
+        "ocr_n_palavras": len(confiancas),
+        "ocr_conf_media": float(np.mean(confiancas)) if confiancas else 0.0,
+        "ocr_prop_letras": total_letras / total_caracteres if total_caracteres else 0.0,
+        "kw_nascimento": contar_palavras_chave(texto, PALAVRAS_NASCIMENTO),
+        "kw_casamento": contar_palavras_chave(texto, PALAVRAS_CASAMENTO),
+        "kw_cetirdao": contar_palavras_chave(texto, PALAVRAS_CERTIDAO),
+        "tem_frase_nascimento": int(FRASE_NASCIMENTO in texto),
+        "tem_frase_casamento": int(FRASE_CASAMENTO in texto),
+
+        "ocr_texto": texto,
+    }
