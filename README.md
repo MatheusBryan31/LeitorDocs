@@ -72,8 +72,8 @@ LeitorDocs/
 ```
 | Caminho              | Descrição                                                                 |
 | -------------------- | ------------------------------------------------------------------------- |
-| `src/assets/imagens/**(classe)**Origem`  | Imagens originais, organizadas em uma subpasta por classe                 |
-| `src/assets/imagens/**(classe)**Destino` | Variações geradas pelo script, mantendo a mesma organização por classe    |
+| `src/assets/imagens/`**(classe)**`Origem`  | Imagens originais, organizadas em uma subpasta por classe                 |
+| `src/assets/imagens/`**(classe)**`Destino` | Variações geradas pelo script, mantendo a mesma organização por classe    |
 | `gerador_imagens.py` | Percorre cada classe e cria 5 novas imagens a partir de cada original   |
 
 ## Instalação
