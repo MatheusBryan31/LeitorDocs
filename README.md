@@ -49,7 +49,6 @@ Antes da criação do modelo, foi necessário reunir e tratar os dados.
 
 - Python versão 3.13.17
 - [Pillow](https://pypi.org/project/pillow/): biblioteca para manipulação de imagens
-- []
 
 ## Estrutura das pastas
 
