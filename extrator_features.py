@@ -76,3 +76,46 @@ def padronizar_largura(imagem, largura_alvo):
     # INTER_AREA é o melhor para reduzir; INTER_CUBIC é o melhor para ampliar
     interpolacao = cv2.INTER_AREA if escala < 1 else cv2.INTER_CUBIC
     return cv2.resize(imagem, (largura_alvo, nova_altura), interpolation=interpolacao)
+
+# ===================================
+# FUNÇÃO PARA NORMALIZAR TEXTO
+# ===================================
+def normalizar_texto(texto):
+    # Separa as letras dos acentor ("ã" vira "a" + "~") e descarta os acentos
+    texto = unicodedata.normalize("NFKD", texto)
+    texto = "".join(c for c in texto if not unicodedata.combining(c))
+    texto = texto.lower()
+
+    # Troca qualquer sequências de espaços/quebras de linha por um único espaço
+    texto = re.sub(r"\s+", " ", texto).strip()
+    return texto
+
+# ===================================
+# FEATURES VISUAIS (qualidade e aparência)
+# ===================================
+def extrair_features_visuais(original, padronizada):
+    altura, largura = original.shape[:2]
+    cinza = cv2.cvtColor(padronizada, cv2.COLOR_BGR2GRAY)
+    hsv = cv2.cvtColor(padronizada, cv2.COLOR_BGR2HSV)
+
+    # Bordas detectadas pelo algoritmo de Canny (imagem preta com bordas brancas)
+    bordas = cv2.Canny(cinza, 100, 200)
+
+    # Binarização de Otsu: separa "tinta" (escuro) do "papel" (claro)
+    _, tinta = cv2.threshold(
+        cinza, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU
+    )
+    return {
+        "largura": largura,
+        "altura": altura,
+        "proporcao": round(largura/altura, 4),
+        "brilho_medio": float(cinza.mean()),
+        "contraste": float(cinza.std()),
+        "nitidez": float(cv2.Laplacin(cinza, cv2.CV_64F).var()),
+        "densidade_bordas": float(np.count_nonzero(bordas)/ bordas.size),
+        "prop_escuros": float(np.mean(cinza < 50)),
+        "prop_claros": float(np.mean(cinza > 200)),
+        "saturacao_media": float(hsv[:, :, 1].mean()),
+        "prop_tinta": float(np.count_nonzero(tinta) / tinta.size),
+    }
+
