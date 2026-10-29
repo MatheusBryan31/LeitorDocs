@@ -173,3 +173,14 @@ def extrair_features_texto(texto_bruto, confiancas):
 
         "ocr_texto": texto,
     }
+
+# ===================================
+# FUNÇÃO PARA PROCESSAR UMA IMAGEM
+# ===================================
+def processar_imagem(caminho, classe):
+    original = ler_imagem(caminho)
+    if original is None:
+        raise ValueError("arquivo não pôde ser decodificado como imagem")
+    padronizada = padronizar_largura(original, LARGURA_PADRAO)
+
+    #
