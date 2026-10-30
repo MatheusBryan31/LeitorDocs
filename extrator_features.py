@@ -229,3 +229,20 @@ def processar_classe(classe):
         except Exception as erro:
             print(f"Erro ao processar {arquivo.name}: {erro}")
         return linhas
+
+# ===================================
+# VERIFICAR SE O TESSERACT ESTÁ PRONTO
+# ===================================
+def verificar_tesseract():
+    try:
+        versao = pytesseract.get_tesseract_version()
+        idiomas = pytesseract.get_languages()
+    except pytesseract.TesseractNotFoundError:
+        print("Tesseract não encontrado. Instale-o e confira CAMINHO_TESSERACT.")
+        return False
+    if IDIOMA_OCR not in idiomas:
+        print(f"Idioma '{IDIOMA_OCR}' não instalado no Tesseract.")
+        return False
+    
+    print(f"Tesseract {versao} pronto(idioma: {IDIOMA_OCR}).")
+    return True
