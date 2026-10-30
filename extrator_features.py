@@ -275,4 +275,11 @@ def main():
     print(f"Arquivo salvo em: {ARQUIVO_SAIDA}")
 
     # Média de algumas features por classe: mostra se elas ajudam a separar as classes
-    
+    colunas_resumo = [
+        "nitidez", "brilho_medio", "ocr_conf_media", "ocr_n_palavras",
+        "kw_nascimento", "kw_casamento", "tem_frase_nascimento", "tem_frase_casamento",
+    ]
+    pd.set_option("display.width", 200)
+    pd.set_option("display.max_columns", None)
+    print("\nMédia por classe:")
+    print(tabela.groupby("classe")[colunas_resumo].mean().round(2))
