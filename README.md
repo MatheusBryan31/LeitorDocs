@@ -10,6 +10,7 @@ Classificador de documentos com Machine Learn para automatizar a triagem de cert
 - [Objetivo](#objetivo)
 - [Classes do modelo](#classes-do-modelo)
 - [Preparação do dataset](#preparação-do-dataset)
+- [Extração de features](#extração-de-features)
 - [Tecnologias utilizadas](#tecnologias-utilizadas)
 - [Estrutura das pastas](#estrutura-das-pastas)
 - [Instalação](#instalação)
@@ -47,8 +48,11 @@ Antes da criação do modelo, foi necessário reunir e tratar os dados.
 
 ## Tecnologias utilizadas
 
-- Python versão 3.13.17
-- [Pillow](https://pypi.org/project/pillow/): biblioteca para manipulação de imagens
+- Python 3.13.17
+- [Pillow](https://pypi.org/project/pillow/): geração das variações das imagens
+- [OpenCV](https://opencv.org/): medição de nitidez, bordas e contraste
+- [NumPy](https://numpy.org/) e [pandas](https://pandas.pydata.org/): cálculos e tabela de features
+- [Tesseract OCR](https://github.com/tesseract-ocr/tesseract) e [pytesseract](https://pypi.org/project/pytesseract/): leitura do texto dos documentos
 
 ## Estrutura das pastas
 
