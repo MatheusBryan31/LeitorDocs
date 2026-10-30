@@ -72,6 +72,7 @@ LeitorDocs/
 |                └───outrosOrigem/
 ├── gerador_imagens.py
 ├── README.md
+├── extrator_features.py
 ├── requirements.txt
 └── ba.gitignore
 ```
@@ -84,6 +85,8 @@ LeitorDocs/
 ## Instalação
 
 Foi criado um ambiente para as bibliotecas do Python e posteriormente foi instalado o Pillow:
+
+
 
 ```bash
 pip install Pillow
