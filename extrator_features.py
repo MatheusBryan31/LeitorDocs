@@ -33,7 +33,7 @@ IDIOMA_OCR = "por"
 
 # Todas as imagens são redimencionadas para esta largura antes da análise,
 # para que as medidas sejam comparáveis entre fotos de tamanhos diferentes
-LARGUR_PADRAO = 1600
+LARGURA_PADRAO = 1600
 
 # Tempo máximo(segundos) que o OCR pode gastar em uma única imagem
 TIMEOUT_OCR = 90
@@ -158,7 +158,7 @@ def extrair_features_texto(texto_bruto, confiancas):
     texto = normalizar_texto(texto_bruto)
     sem_espacos = texto.replace(" ", "")
     total_caracteres = len(sem_espacos)
-    total_letras = sum(c.isalpha() for c in sem_espaco)
+    total_letras = sum(c.isalpha() for c in sem_espacos)
 
     return {
         "ocr_n_caracteres": total_caracteres,
@@ -199,3 +199,33 @@ def processar_imagem(caminho, classe):
     linha.update(extrair_features_visuais(original, padronizada))
     linha.update(extrair_features_texto(texto_bruto, confiancas))
     return linha
+
+# ===================================
+# FUNÇÃO PARA PROCESSAR UMA CLASSE
+# ===================================
+def processar_classe(classe):
+    print(f"\nProcessamento classe: {classe.upper()}")
+
+    pasta_destino = PASTA_BASE / classe / f"{classe}Destino"
+
+    if not pasta_destino.exists():
+        print(f"Pasta não encontrada: {pasta_destino}")
+        return []
+
+    arquivos = sorted([
+        arquivo
+        for arquivo in pasta_destino.iterdir()
+        if arquivo.is_file() and arquivo.suffix.lower() in EXTENSOES
+    ])
+    if not arquivos:
+        print("Nenhuma imagem encontrada.")
+        return []
+    linhas = []
+
+    for posicao, arquivo in enumerate(arquivos, start=1):
+        try:
+            linhas.append(processar_imagem(arquivo, classe))
+            print(f"[{posicao}/{len(arquivos)}] {arquivo.name}")
+        except Exception as erro:
+            print(f"Erro ao processar {arquivo.name}: {erro}")
+        return linhas
