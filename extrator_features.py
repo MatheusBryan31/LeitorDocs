@@ -183,4 +183,19 @@ def processar_imagem(caminho, classe):
         raise ValueError("arquivo não pôde ser decodificado como imagem")
     padronizada = padronizar_largura(original, LARGURA_PADRAO)
 
-    #
+    # O nome do arquivo segue o padrão criado pelo gerador_imagens.py:
+    # classe_contador_tipo.jpg -> ex.: casamento_3_rotacao_positiva.jpg
+    partes = caminho.stem.split("_", 2)
+    grupo = "_".join(partes[:2])
+    variacao = partes[2] if len(partes) > 2 else "desconhecida"
+    texto_bruto, confiancas = executar_ocr(padronizada)
+
+    linha = {
+        "arquivo": caminho.name,
+        "classe": classe,
+        "grupo": grupo,
+        "variacao": variacao,
+    }
+    linha.update(extrair_features_visuais(original, padronizada))
+    linha.update(extrair_features_texto(texto_bruto, confiancas))
+    return linha
