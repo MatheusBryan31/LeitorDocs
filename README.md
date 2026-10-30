@@ -86,7 +86,24 @@ LeitorDocs/
 
 Foi criado um ambiente para as bibliotecas do Python e posteriormente foi instalado o Pillow:
 
+### 1. Ambiente virtual e dependências
 
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+### 2. Tesseract OCR
+
+O Tesseract é um programa do sistema e deve ser instalado separadamente.
+Durante a instalação, selecione o idioma **Portuguese**. Para conferir:
+
+```bash
+tesseract --list-langs
+```
+
+### 3. Pillow
 
 ```bash
 pip install Pillow
