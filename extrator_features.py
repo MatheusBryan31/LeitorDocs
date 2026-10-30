@@ -246,3 +246,33 @@ def verificar_tesseract():
     
     print(f"Tesseract {versao} pronto(idioma: {IDIOMA_OCR}).")
     return True
+
+# ===================================
+# FUNÇÃO PRINCIPAL
+# ===================================
+def main():
+    print("===================================")
+    print(" EXTRATOR DE FEATURES - LeitorDocs")
+    print("===================================")
+
+    if not verificar_tesseract():
+        return
+    todas_as_linhas = []
+
+    for classe in CLASSES:
+        todas_as_linhas.extend(processar_classe(classe))
+
+    if not todas_as_linhas:
+        print("Nenhuma feature extraída.")
+        return
+    tabela = pd.DataFrame(todas_as_linhas)
+    tabela.to_csv(ARQUIVO_SAIDA, index=False, encoding="utf-8")
+
+    print("\n===================================")
+    print(" EXTRAÇÃO FINALIZADA")
+    print("\n===================================")
+    print(f"Imagens processadas: {len(tabela)}")
+    print(f"Arquivo salvo em: {ARQUIVO_SAIDA}")
+
+    # Média de algumas features por classe: mostra se elas ajudam a separar as classes
+    
