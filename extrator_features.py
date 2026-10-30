@@ -283,3 +283,9 @@ def main():
     pd.set_option("display.max_columns", None)
     print("\nMédia por classe:")
     print(tabela.groupby("classe")[colunas_resumo].mean().round(2))
+
+# ===================================
+# EXECUÇÃO DO PROGRAMA
+# ===================================
+if __name__ == "__main__":
+    main()
