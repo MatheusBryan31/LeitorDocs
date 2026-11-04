@@ -228,7 +228,7 @@ def processar_classe(classe):
             print(f"[{posicao}/{len(arquivos)}] {arquivo.name}")
         except Exception as erro:
             print(f"Erro ao processar {arquivo.name}: {erro}")
-        return linhas
+    return linhas
 
 # ===================================
 # VERIFICAR SE O TESSERACT ESTÁ PRONTO
