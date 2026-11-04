@@ -111,7 +111,7 @@ def extrair_features_visuais(original, padronizada):
         "proporcao": round(largura/altura, 4),
         "brilho_medio": float(cinza.mean()),
         "contraste": float(cinza.std()),
-        "nitidez": float(cv2.Laplacin(cinza, cv2.CV_64F).var()),
+        "nitidez": float(cv2.Laplacian(cinza, cv2.CV_64F).var()),
         "densidade_bordas": float(np.count_nonzero(bordas)/ bordas.size),
         "prop_escuros": float(np.mean(cinza < 50)),
         "prop_claros": float(np.mean(cinza > 200)),
