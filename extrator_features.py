@@ -167,7 +167,7 @@ def extrair_features_texto(texto_bruto, confiancas):
         "ocr_prop_letras": total_letras / total_caracteres if total_caracteres else 0.0,
         "kw_nascimento": contar_palavras_chave(texto, PALAVRAS_NASCIMENTO),
         "kw_casamento": contar_palavras_chave(texto, PALAVRAS_CASAMENTO),
-        "kw_cetirdao": contar_palavras_chave(texto, PALAVRAS_CERTIDAO),
+        "kw_certidao": contar_palavras_chave(texto, PALAVRAS_CERTIDAO),
         "tem_frase_nascimento": int(FRASE_NASCIMENTO in texto),
         "tem_frase_casamento": int(FRASE_CASAMENTO in texto),
 
