@@ -10,6 +10,7 @@ Classificador de documentos com Machine Learn para automatizar a triagem de cert
 - [Objetivo](#objetivo)
 - [Classes do modelo](#classes-do-modelo)
 - [Preparação do dataset](#preparação-do-dataset)
+- [Extração das features](#extração-das-features)
 - [Extração de features](#extração-de-features)
 - [Tecnologias utilizadas](#tecnologias-utilizadas)
 - [Estrutura das pastas](#estrutura-das-pastas)
@@ -45,6 +46,21 @@ Antes da criação do modelo, foi necessário reunir e tratar os dados.
 - **Data Augmentation:** Para cada imagem original, são geradas cinco novas imagens com ângulo e clareza diferentes, aumentando a variabilidade do dataset.
 
 > **O que é Data Augmentation?** É a técnica de recriar uma imagem em outros ângulos e tons, ampliando o dataset sem a necessidade de coletar novos dados.
+
+## Extração das features
+
+Os modelos de classificação trabalham com dados estruturados, então cada imagem é transformada em uma linha de números(features) salva em `features.csv`.
+
+- **Features visuais:** nitidez, brilho, contraste, densidade das bordas, proporção de pixels escuros e claros, saturação, proporção de tinta e dimenções da imagem.
+- **Features de OCR:** quantidade de texto, confiança média do OCR, proporção de letras e presença de palavras-chave de cada tipo de certidão.
+
+> **Atenção:** as variações geradas a partir da mesma imagem original compartilham o mesmo `grupo`. Na divisão entre treino e teste, os grupos não podem ser separados, para evitar vazamento de dados.
+
+Para gerar a tabela:
+
+```bash
+python extrator_features.py
+```
 
 ## Tecnologias utilizadas
 
