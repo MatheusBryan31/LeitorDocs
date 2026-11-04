@@ -90,7 +90,7 @@ LeitorDocs/
 ├── README.md
 ├── extrator_features.py
 ├── requirements.txt
-└── ba.gitignore
+└── .gitignore
 ```
 | Caminho              | Descrição                                                                 |
 | -------------------- | ------------------------------------------------------------------------- |
