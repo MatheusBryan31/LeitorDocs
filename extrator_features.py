@@ -81,7 +81,7 @@ def padronizar_largura(imagem, largura_alvo):
 # FUNÇÃO PARA NORMALIZAR TEXTO
 # ===================================
 def normalizar_texto(texto):
-    # Separa as letras dos acentor ("ã" vira "a" + "~") e descarta os acentos
+    # Separa as letras dos acentos ("ã" vira "a" + "~") e descarta os acentos
     texto = unicodedata.normalize("NFKD", texto)
     texto = "".join(c for c in texto if not unicodedata.combining(c))
     texto = texto.lower()
