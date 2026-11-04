@@ -19,7 +19,7 @@ PASTA_BASE = BASE_DIR / "src/assets/imagens"
 # Arquivo CSV que receberá a tabela de features
 ARQUIVO_SAIDA = BASE_DIR / "features.csv"
 
-# Classes que será processadas
+# Classes que serão processadas
 CLASSES = ["nascimento", "casamento", "outros"]
 
 # Extensões permitidas
@@ -48,7 +48,7 @@ PALAVRAS_NASCIMENTO = [
     "nascimento", "nascido", "nascida", "filiacao", "avos", "gemeo",
 ]
 PALAVRAS_CASAMENTO = [
-    "casamento", "casado", "casada", "conjugue", "conjuges", "regime de bens", "nubente", "nubentes",
+    "casamento", "casado", "casada", "conjugue", "regime de bens", "nubente",
 ]
 PALAVRAS_CERTIDAO = [
     "certidao", "registro civil", "matricula", "cartorio", "oficial de registro", "republica federativa",
