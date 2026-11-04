@@ -26,7 +26,7 @@ CLASSES = ["nascimento", "casamento", "outros"]
 EXTENSOES = [".jpg", ".jpeg", ".png"]
 
 # Caminho padrão do Tesseract no Windows
-CAMINHO_TESSERACT = r"C:\ProgamFiles\Tesseract-OCR\tesseract.exe"
+CAMINHO_TESSERACT = r"C:\Progam Files\Tesseract-OCR\tesseract.exe"
 
 # Idioma do OCR:
 IDIOMA_OCR = "por"
