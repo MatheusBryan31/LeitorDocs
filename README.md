@@ -150,7 +150,7 @@ from pathlib import Path
 
 - [x] Coleta das imagens originais
 - [x] Script de Data Augmentation
-- [ ] Script de extração das features
+- [x] Script de extração das features
 - [ ] Treinamento do modelo
 - [ ] Avaliação do modelo
 - [ ] Integração com o fluxo de matrículas e inscrições
