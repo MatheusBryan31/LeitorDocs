@@ -100,3 +100,12 @@ def montar_modelos():
             },
         ),
     ]
+
+# ===================================================
+# FUNÇÃO PARA CARREGAR OS DADOS
+# ===================================================
+def carregar_dados():
+    if not ARQUIVO_FEATURES.exists():
+        raise FileNotFoundError(
+            f"{ARQUIVO_FEATURES.name} não encontrado. Rode o extrator_features.py antes."
+        )
