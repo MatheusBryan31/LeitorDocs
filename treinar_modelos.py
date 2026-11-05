@@ -135,4 +135,21 @@ def dividir_treino_teste(X, y, grupos):
         n_splits=N_DOBRAS, shuffle=True, random_state=RANDOM_STATE
     )
 
-    
+    # ??
+    indices_treino, indices_teste = next(divisor.split(X, y, grupos))
+    X_treino, X_teste = X.iloc[indices_treino], X.iloc[indices_teste]
+    y_treino, y_teste = y.iloc[indices_treino], y.iloc[indices_teste]
+    g_treino, g_teste = grupos.iloc[indices_treino], grupos.iloc[indices_teste]
+
+    # ALERTA: Nenhuma foto original pode estar nos dois conjuntos (treino e teste)
+    repetidos = set(g_treino) & set(g_teste)
+    assert not repetidos, f"Vazamento de dados! Grupos nos dois conjuntos: {repetidos}"
+
+    print(
+        f"\nTreino: {len(X_treino)} imagens ({g_treino.nunique()} grupos) | "
+        f"Teste: {len(X_teste)} imagens ({g_teste.nunique()} grupos)"
+    )
+    print("Teste por classe:")
+    print(y_teste.value_counts().to_string())
+
+    return X_treino, X_teste, y_treino, y_teste, g_treino
