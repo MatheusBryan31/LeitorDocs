@@ -126,3 +126,13 @@ def carregar_dados():
     print(y.value_counts().to_string())
 
     return X, y, grupos
+
+# ===================================================
+# FUNÇÃO PARA DIVIDIR TREINO E TESTE (POR GRUPO)
+# ===================================================
+def dividir_treino_teste(X, y, grupos):
+    divisor = StratifiedGroupKFold(
+        n_splits=N_DOBRAS, shuffle=True, random_state=RANDOM_STATE
+    )
+
+    
