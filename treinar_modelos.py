@@ -109,3 +109,10 @@ def carregar_dados():
         raise FileNotFoundError(
             f"{ARQUIVO_FEATURES.name} não encontrado. Rode o extrator_features.py antes."
         )
+    tabela = pd.read_csv(ARQUIVO_FEATURES)
+    y = tabela["classe"]
+    grupos = tabela["grupo"]
+
+    # Features = ??
+    X = tabela.drop(columns=COLUNAS_NAO_FEATURES + COLUNAS_IGNORADAS, errors="ignore")
+    
