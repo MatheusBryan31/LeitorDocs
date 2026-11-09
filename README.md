@@ -78,18 +78,18 @@ python extrator_features.py
 
 ```text
 LeitorDocs/
-├──src/
-|    └───assets/
-|        └───imagens/
-|            ├───casamento/
-|            │   ├───casamentoDestino/
-|            │   └───casamentoOrigem/
-|            ├───nascimento/
-|            │   ├───nascimentoDestino/
-|            │   └───nascimentoOrigem/
-|            └───outros/
-|                ├───outrosDestino/
-|                └───outrosOrigem/
+├── src/
+|    └─── assets/
+|        └─── imagens/
+|            ├─── casamento/
+|            │   ├─── casamentoDestino/
+|            │   └─── casamentoOrigem/
+|            ├─── nascimento/
+|            │   ├─── nascimentoDestino/
+|            │   └─── nascimentoOrigem/
+|            └─── outros/
+|                ├─── outrosDestino/
+|                └─── outrosOrigem/
 ├── gerador_imagens.py
 ├── README.md
 ├── extrator_features.py
