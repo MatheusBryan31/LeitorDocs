@@ -169,3 +169,7 @@ def salvar_matriz_confusao(id_modelo, nome, y_real, y_previsto):
     eixo.set_title(f"Matriz de confusão - {nome}")
     eixo.set_xlabel("Classe prevista")
     eixo.set_ylabel("Classe real")
+    figura.tight_layout()
+    caminho = PASTA_RESULTADOS / f"matriz_{id_modelo}.png"
+    figura.savefig(caminho, dpi=150)
+    plt.close(figura)
