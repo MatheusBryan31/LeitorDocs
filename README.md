@@ -94,7 +94,13 @@ LeitorDocs/
 ├── README.md
 ├── extrator_features.py
 ├── requirements.txt
-└── .gitignore
+├── .gitignore
+├── treinar_modelos.py
+├── resultados/
+|   ├── comparacao_modelos.csv
+|   └── matriz_<modelo>.png
+└── modelos/
+    └── modelo_final.joblib
 ```
 | Caminho              | Descrição                                                                 |
 | -------------------- | ------------------------------------------------------------------------- |
