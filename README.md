@@ -78,7 +78,17 @@ Os dados são separados em treino (80%) e teste (20%) **por grupo**: todas as va
 | Random Forest | Conjunto de árvores (bagging) |
 | Gradient Boosting | Conjunto de árvores (boosting) |
 
-Os parâmetros de cada modelo foram ajustados
+Os parâmetros de cada modelo foram ajustados com `GridSearchCV` e avaliação cruzada com cinco dobras
+
+### Métricas
+
+Acurácia, precisão, recall e F1 (por classe e macro) e matriz de confusão. **Critério do projeto**
+
+### Como executar
+
+```bash
+python treinar_modelos.py
+```
 
 ## Tecnologias utilizadas
 
