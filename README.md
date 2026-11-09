@@ -90,6 +90,19 @@ Acurácia, precisão, recall e F1 (por classe e macro) e matriz de confusão. **
 python treinar_modelos.py
 ```
 
+## Resultados
+
+_Preencher após a execução._
+
+| Modelo | Acurácia | F1 macro | Recall mínimo | Atende 97%? |
+| ------ | -------- | -------- | ------------- | ----------- |
+| Regressão Logística | | | | |
+| SVM (kernel RBF) | | | | |
+| Random Forest | | | | |
+| Gradient Boosting | | | | |
+
+**Modelo escolhido:** _a definir, com a justificativa_. 
+
 ## Tecnologias utilizadas
 
 - Python 3.13.17
@@ -188,6 +201,7 @@ from pathlib import Path
 - [x] Script de Data Augmentation
 - [x] Script de extração das features
 - [ ] Treinamento do modelo
+- [ ] Validação do recall mínimo de 97% por classe
 - [ ] Avaliação do modelo
 - [ ] Integração com o fluxo de matrículas e inscrições
 
