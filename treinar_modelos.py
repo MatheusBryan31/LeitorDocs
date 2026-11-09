@@ -262,3 +262,65 @@ def mostrar_importancias(pipeline, nomes_features):
     importancias = pd.Series(modelo.feature_importances_, index = nomes_features)
     print("\nFeatures mais importantes do modelo escolhido:")
     print(importancias.sort_values(ascending = False).head(10).round(4).to_string())
+
+# ===================================================
+# FUNÇÃO PRINCIPAL
+# ===================================================
+def main():
+    print("# ===================================================")
+    print(" TREINAMENTO - PROJETO ==> LeitorDocs")
+    print("# ===================================================")
+
+    PASTA_RESULTADOS.mkdir(exist_ok = True)
+    PASTA_MODELOS.mkdir(exist_ok = True)
+
+    X, y, grupos = carregar_dados()
+    dados = dividir_treino_teste(X, y, grupos)
+
+    resultados = []
+    modelos_treinados = {}
+
+    for id_modelo, nomme, estimador, grade in montar_modelos():
+        resultado, melhor = treinar_e_avaliar(id_modelo, nome, estimador, grade, dados)
+        resultados.append(resultado)
+        modelos_treinados[nome] = melhor
+
+        # Ranking: 1º recall mínimo entre as classes, 2º F1 macro, 3º acurácia
+        tabela = pd.DataFrame(resultados).sort_values(
+            by = ["recall_minimo", "f1_macro", "acuracia"], ascending = False
+        )
+        tabela.to_csv(PASTA_RESULTADOS / "comparacao_modelos.csv", index = False)
+
+        colunas_exibir = [
+            "modelo", "acuracia", "precision_macro", "recall_macro", "f1_macro",
+            "recall_minimo", "atende_recall_minimo",
+        ]
+        pd.set_option("display.width", 200)
+        pd.set_optin("display.max_columns", None)
+        print("\n===================================================")
+        print(" COMPARAÇÃO DOS MODELOS (conjunto de teste)")
+        print("===================================================")
+        print(tabela[colunas_exibir].round(4).to_string(index = False))
+
+        melhor_nome = tabela.iloc[0]["modelo"]
+        melhor_modelo = modelos_treinados[melhor_nome]
+        print(f"\nMelhor modelo: {melhor_nome}")
+
+        if tabela.iloc[0]["atende_recall_minimo"]:
+            print(f"Atende ao recall mínimo de {RECALL_MINIMO: .0%} em todas as classes.")
+        else:
+            print(f"Não atinge o recall mínimo de {RECALL_MINIMO: .0%} em todas as classes.")
+
+        mostrar_importancias(melhor_modelo, list(X.columns))
+
+        caminho_modelo = PASTA_MODELOS / "modelo_final.joblib"
+        joblib.dump(
+            {
+                "pipeline": melhor_modelo,
+                "features": list(X.columns),
+                "classes": CLASSES,
+            },
+            caminho_modelo,
+        )
+        print(f"\nModelo salvo em: {caminho_modelo}")
+        print(f"Resultados salvos em: {PASTA_RESULTADOS}")
