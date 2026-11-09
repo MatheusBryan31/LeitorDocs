@@ -259,4 +259,6 @@ def mostrar_importancias(pipeline, nomes_features):
     if not hasattr(modelo, "feature_importances"):
         return
 
-    importancias = pd.Series(modelo.feature_importances_,)
+    importancias = pd.Series(modelo.feature_importances_, index = nomes_features)
+    print("\nFeatures mais importantes do modelo escolhido:")
+    print(importancias.sort_values(ascending = False).head(10).round(4).to_string())
