@@ -71,6 +71,8 @@ python extrator_features.py
 - [OpenCV](https://opencv.org/): medição de nitidez, bordas e contraste
 - [NumPy](https://numpy.org/) e [pandas](https://pandas.pydata.org/): cálculos e tabela de features
 - [Tesseract OCR](https://github.com/tesseract-ocr/tesseract) e [pytesseract](https://pypi.org/project/pytesseract/): leitura do texto dos documentos
+- [scikit-learn](https://scikit-learn.org/): treinamento e avaliação dos modelos
+- [matplotlib](https://matplotlib.org/): geração das matrizes de confusão
 
 ## Estrutura das pastas
 
