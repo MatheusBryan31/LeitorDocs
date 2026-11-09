@@ -11,7 +11,6 @@ Classificador de documentos com Machine Learn para automatizar a triagem de cert
 - [Classes do modelo](#classes-do-modelo)
 - [Preparação do dataset](#preparação-do-dataset)
 - [Extração das features](#extração-das-features)
-- [Extração de features](#extração-de-features)
 - [Treinamento e avaliação](#treinamento-e-avaliação)
 - [Resultados](#resultados)
 - [Tecnologias utilizadas](#tecnologias-utilizadas)
