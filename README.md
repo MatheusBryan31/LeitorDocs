@@ -48,7 +48,7 @@ Antes da criação do modelo, foi necessário reunir e tratar os dados.
 
 > **O que é Data Augmentation?** É a técnica de recriar uma imagem em outros ângulos e tons, ampliando o dataset sem a necessidade de coletar novos dados.
 
-## Extração das features
+## Extração de features
 
 Os modelos de classificação trabalham com dados estruturados, então cada imagem é transformada em uma linha de números(features) salva em `features.csv`.
 
@@ -62,6 +62,23 @@ Para gerar a tabela:
 ```bash
 python extrator_features.py
 ```
+
+## Treinamento e avaliação
+
+### Divisão dos dados
+
+Os dados são separados em treino (80%) e teste (20%) **por grupo**: todas as variações geradas
+
+### Modelos comparados
+
+| Modelo | Família |
+| ------ | ------- |
+| Regressão Logística | Linear |
+| SVM (kernel RBF) | Baseado em margem |
+| Random Forest | Conjunto de árvores (bagging) |
+| Gradient Boosting | Conjunto de árvores (boosting) |
+
+Os parâmetros de cada modelo foram ajustados
 
 ## Tecnologias utilizadas
 
