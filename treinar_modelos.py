@@ -109,3 +109,23 @@ def carregar_dados():
         raise FileNotFoundError(
             f"{ARQUIVO_FEATURES.name} não encontrado. Rode o extrator_features.py antes."
         )
+
+    tabela = pd.read_csv(ARQUIVO_FEATURES)
+
+    y = tabela["classe"]
+    grupos = tabela["grupo"]
+
+    # Features = todas as colunas numéricas, menos as que o usuário desligou
+    X = tabela.drop(columns = COLUNAS_NAO_FEATURES + COLUNAS_IGNORADAS, errors = "ignore")
+    X = X.select_dtypes(include="number")
+
+    if X.isna().any().any():
+        colunas_com_nan = X.columns[X.isna().any()].tolist()
+        raise ValueError(f"Há valores ausentes nas colunas: {colunas_com_nan}")
+
+    print(f"Imagens: {len(X)} | Grupos (fotos originais): {grupos.nunique()}")
+    print(f"Features usadas ({X.shape[1]}): {', '.join(X.columns)}")
+    print("\nImagens por classe:")
+    print(y.value_counts().to_string())
+
+    return X, y, grupos
