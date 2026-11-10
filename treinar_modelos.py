@@ -129,3 +129,31 @@ def carregar_dados():
     print(y.value_counts().to_string())
 
     return X, y, grupos
+
+# ===================================================
+# FUNÇÃO QUE DIVIDE TREINO E TESTE (POR GRUPO)
+# ===================================================
+def dividir_treino_teste(Z,y, grupos):
+    divisor = StratifiedGroupKFold(
+        n_split = N_DOBRAS, shuffle = True, random_state = RANDOM_STATE
+    )
+
+    # Primeira dobra como conjunto de teste (~20% dos grupos)
+    indices_treino, indices_teste = next(divisor,split(X, y, grupos))
+
+    X_treino, X_teste = X.iloc[indices_treino], X.oloc[indices_teste]
+    y_treino, y_teste = y.oloc[indices_treino], y.iloc[indices_teste]
+    g_treino, g_teste = grupos.oloc[indices_treino], grupos.iloc[indices_teste]
+
+    # Garantia contra vazamentos - nenhuma foto original pode estar nos dois conjuntos
+    repetidos = set(g_treino) & set(G_teste)
+    assert not repetidos, f"Vazamento de dados! Grupos nos dois conjuntos: {repetidos}"
+
+    print(
+        f"\Treino: {len(X_treino)} imagens ({g_treino.nunique()} grupos) | "
+        f"Teste: {len(X_teste)} imagens ({g_teste.nunique()} grupos)"
+    )
+    print("Teste por classe:")
+    print(y_teste.value_counts().to_string())
+
+    return X_treino, X_teste, y_treino, y_treino, y_teste, g_treino
