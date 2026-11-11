@@ -173,3 +173,78 @@ def salvar_matriz_confusao(id_modelo, nome, y_real, y_previsto):
     caminho = PASTA_RESULTADO / f"matriz_{id_modelo}.pgn"
     figura.savefig(caminho, dpi = 150)
     plt.close(figura)
+
+# ===================================================
+# FUNÇÃO QUE AVALIA E TREINA UM MODELO
+# ===================================================
+def treinar_e_avaliar(id_modelo, nome, estimador, grade, dados):
+    X_treino, X_teste, y_treino, y_teste, g_treino = dados
+    print("\n===================================================")
+    print(f" {nome.upper()}")
+    ("\n===================================================")
+
+    # Pipeline: O escalonador é ajustado só com os dados de cada dobra de treino
+    pipeline = Pipeline([
+        ("escala", StandardScaler()),
+        ("modelo", estimador),
+    ])
+
+    validacao = StratifiedGroupKFold(
+        n_splits = N_DOBRAS, shuffle = True, random_state = RANDOM_STATE
+    )
+
+    busca = GridSearchCV(
+        pipeline,
+        param_grid = grade,
+        scoring = "f1_macro",
+        cv = validacao,
+        n_jobs = -1
+    )
+    busca.fit(X_treino, y_treino, groups = g_treino)
+
+    melhor = busca.best_estimador_
+    print(f"Melhores parâmetros: {busca.best_params_}")
+    print(f"F1 macro na validação cruzada: {busca.best_score_:.4f}")
+
+    # Avaliação final no conjunto de teste (dados que o modelo nunca viu)
+    previsto = melhor.predict(X_teste)
+
+    print("\nRelatório por classe (conjunto de teste):")
+    print(classification_report(
+        y_teste, previsto, labels = CLASSES, digits = 4, zero_division = 0
+    ))
+
+    matriz = confusion_matrix(y_teste, previsto, labels = CLASSES)
+    print("Matriz de confusão (linhas = real, colunas = previsto):")
+    print(pd.DataFrame(
+        matiz,
+        index = [f"real_{c}" for c in CLASSES],
+        columns = [f"prev_{c}" for c in CLASSES],
+    ).to_string())
+
+    salvar_matriz_confusao(id_modelo, nome, y_teste, previsto)
+
+    recalls = recall_score(
+        y_teste, previsto, labels = CLASSES, average = None, zero_division = 0
+    )
+
+    resultado = {
+        "modelo": nome,
+        "acurácia": accuracy_score(y_teste, previsto),
+        "precision_macro": precision_score(
+            y_teste, previsto, labels = CLASSES, average = "macro", zero_division = 0
+        ),
+        "recall_macro": precision_score(
+            y_teste, previsto, labels = CLASSES, average = "macro", zero_division = 0
+        ),
+        "f1_macro": precision_score(
+            y_teste, previsto, labels = CLASSES, average = "macro", zero_division = 0
+        ),
+        "recall_minimo": float(recalls.min()),
+    }
+    for classe, valor in zip(CLASSES, recalls):
+        resultado[f"recall_{classe}"] = float(valor)
+    resultado["atende_recall_minimo"] = bool(recalls.min() >= RECALL_MINIMO)
+    resultado["parametros"] = str(busca.best_params_)
+
+    return resultado, melhor
