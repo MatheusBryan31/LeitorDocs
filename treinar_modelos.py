@@ -169,7 +169,7 @@ def dividir_treino_teste(X, y, grupos):
 def salvar_matriz_confusao(id_modelo, nome, y_real, y_previsto):
     figura, eixo = plt.subplots(figsize=(6, 5))
     ConfusionMatrixDisplay.from_predictions(
-        y_real, y_previsto, labels=CLASSES, cmap="Blues", ax=eixo
+        y_real, y_previsto, labels=CLASSES, cmap="Purples", ax=eixo
     )
     eixo.set_title(f"Matriz de confusão - {nome}")
     eixo.set_xlabel("Classe prevista")

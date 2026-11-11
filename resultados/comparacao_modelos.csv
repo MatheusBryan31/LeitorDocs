@@ -1,0 +1,5 @@
+modelo,acuracia,precision_macro,recall_macro,f1_macro,recall_minimo,recall_nascimento,recall_casamento,recall_outros,atende_recall_minimo,parametros
+Gradient Boosting,0.6888888888888889,0.6878787878787879,0.6888888888888888,0.6872458925090504,0.6,0.7,0.6,0.7666666666666667,False,"{'modelo__learning_rate': 0.05, 'modelo__max_depth': 2, 'modelo__n_estimators': 200}"
+Random Forest,0.7111111111111111,0.7237654320987654,0.7111111111111111,0.7092973980845834,0.5666666666666667,0.7,0.5666666666666667,0.8666666666666667,False,"{'modelo__max_depth': 5, 'modelo__min_samples_leaf': 1, 'modelo__n_estimators': 100}"
+SVM (kernel RBF),0.6777777777777778,0.6985137085137084,0.6777777777777777,0.670575388222447,0.5333333333333333,0.6,0.5333333333333333,0.9,False,"{'modelo__C': 10, 'modelo__class_weight': None, 'modelo__gamma': 0.1}"
+Regressão Logística,0.5888888888888889,0.5936592143488696,0.5888888888888889,0.5889054448376482,0.5,0.5,0.6,0.6666666666666666,False,"{'modelo__C': 0.1, 'modelo__class_weight': None}"
