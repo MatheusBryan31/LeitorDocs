@@ -157,3 +157,19 @@ def dividir_treino_teste(Z,y, grupos):
     print(y_teste.value_counts().to_string())
 
     return X_treino, X_teste, y_treino, y_treino, y_teste, g_treino
+
+# ===================================================
+# FUNÇÃO QUE SALVA A MATRIZ DE CONFUSÃO
+# ===================================================
+def salvar_matriz_confusao(id_modelo, nome, y_real, y_previsto):
+    figura, eixo = plt.subplots(figsize = (6, 5))
+    ConfusionMatrixDisplay.from_predictions(
+        y_real, y_previsto, labels = CLASSES, cmap = "Blues", ax = eixo
+    )
+    eixo.set_title(f"Matriz de confusão - {nome}")
+    eixo.set_xlabel("Classe prevista")
+    eixo.set_ylabel("Classe real")
+    figura.tight_layout()
+    caminho = PASTA_RESULTADO / f"matriz_{id_modelo}.pgn"
+    figura.savefig(caminho, dpi = 150)
+    plt.close(figura)
