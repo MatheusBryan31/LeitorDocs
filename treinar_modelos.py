@@ -1,12 +1,27 @@
-import re
-import unicodedata
 from pathlib import Path
 
-import cv2
-import numpy as np
+import joblib
+import matplotlib
+
+# Backend "Agg": só salva figuras em arquivo, sem abrir janelas
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
 import pandas as pd
-import pytesseract
-from pytesseract import Output
+from sklearn.ensemble import GradientBoostingClassifier, RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import (
+    ConfusionMatrixDisplay,
+    accuracy_score,
+    classification_report,
+    confusion_matrix,
+    f1_score,
+    precision_score,
+    recall_score,
+)
+from sklearn.model_selection import GridSearchCV, StratifiedGroupKFold
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.svm import SVC
 
 # ===================================
 # CONFIGURAÇÕES
@@ -14,273 +29,245 @@ from pytesseract import Output
 # Diretório principal do projeto
 BASE_DIR = Path(__file__).resolve().parent
 
-# Pasta principal das imagens
-PASTA_BASE = BASE_DIR / "src/assets/imagens"
+# Tabela gerada pelo extrator_features.py
+ARQUIVO_FEATURES = BASE_DIR / "features.csv"
 
-# Arquivo CSV que receberá a tabela de features
-ARQUIVO_SAIDA = BASE_DIR / "features.csv"
+# Pastas de saída
+PASTA_RESULTADOS = BASE_DIR / "resultados"
+PASTA_MODELOS = BASE_DIR / "modelos"
 
-# Classes que serão processadas
+# Classes do problema (a ordem define a ordem das matrizes de confusão)
 CLASSES = ["nascimento", "casamento", "outros"]
 
-# Extensões permitidas
-EXTENSOES = [".jpg", ".jpeg", ".png"]
+# Semente aleatória: garante que os resultados sejam reproduzíveis
+RANDOM_STATE = 42
 
-# Caminho padrão do Tesseract no Windows (ajuste se instalou em outro lugar)
-CAMINHO_TESSERACT = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+# Número de dobras. Também define o teste: 1 dobra de 5 = 20% dos grupos
+N_DOBRAS = 5
 
-# Idioma do OCR: "por" = português
-IDIOMA_OCR = "por"
+# Exigência do trabalho: recall mínimo em CADA classe
+RECALL_MINIMO = 0.97
 
-# Todas as imagens são redimensionadas para esta largura antes da análise,
-# para que as medidas sejam comparáveis entre fotos de tamanhos diferentes
-LARGURA_PADRAO = 1600
+# Colunas que descrevem a imagem, mas que NÃO são features
+COLUNAS_NAO_FEATURES = ["arquivo", "classe", "grupo", "variacao", "ocr_texto"]
 
-# Tempo máximo (segundos) que o OCR pode gastar em uma única imagem
-TIMEOUT_OCR = 90
-
-# Se o Tesseract estiver instalado no caminho acima, o Python passa a usá-lo
-if Path(CAMINHO_TESSERACT).exists():
-    pytesseract.pytesseract.tesseract_cmd = CAMINHO_TESSERACT
+# Features que você quer desligar para testar (ex.: ["largura", "altura", "proporcao"])
+COLUNAS_IGNORADAS = []
 
 
 # ===================================
-# PALAVRAS-CHAVE (sempre sem acento e em minúsculas)
+# MODELOS E PARÂMETROS TESTADOS
 # ===================================
-PALAVRAS_NASCIMENTO = [
-    "nascimento", "nascido", "nascida", "filiacao", "avos", "gemeo",
-]
-
-# Sem plurais: "conjuge" já é encontrado dentro de "conjuges", e "nubente" dentro
-# de "nubentes". Listar os dois faria o mesmo trecho ser contado duas vezes.
-PALAVRAS_CASAMENTO = [
-    "casamento", "casado", "casada", "conjuge", "regime de bens", "nubente",
-]
-
-PALAVRAS_CERTIDAO = [
-    "certidao", "registro civil", "matricula", "cartorio",
-    "oficial de registro", "republica federativa",
-]
-
-FRASE_NASCIMENTO = "certidao de nascimento"
-FRASE_CASAMENTO = "certidao de casamento"
-
-
-# ===================================
-# FUNÇÃO PARA LER UMA IMAGEM
-# ===================================
-def ler_imagem(caminho):
-    # np.fromfile + imdecode funciona mesmo com acentos no caminho (Windows),
-    # coisa que o cv2.imread sozinho não garante
-    dados = np.fromfile(str(caminho), dtype=np.uint8)
-    return cv2.imdecode(dados, cv2.IMREAD_COLOR)
-
-
-# ===================================
-# FUNÇÃO PARA PADRONIZAR A LARGURA
-# ===================================
-def padronizar_largura(imagem, largura_alvo):
-    altura, largura = imagem.shape[:2]
-    if largura == largura_alvo:
-        return imagem
-
-    escala = largura_alvo / largura
-    nova_altura = int(altura * escala)
-
-    # INTER_AREA é o melhor para reduzir; INTER_CUBIC é o melhor para ampliar
-    interpolacao = cv2.INTER_AREA if escala < 1 else cv2.INTER_CUBIC
-    return cv2.resize(imagem, (largura_alvo, nova_altura), interpolation=interpolacao)
-
-
-# ===================================
-# FUNÇÃO PARA NORMALIZAR TEXTO
-# ===================================
-def normalizar_texto(texto):
-    # Separa as letras dos acentos ("ã" vira "a" + "~") e descarta os acentos
-    texto = unicodedata.normalize("NFKD", texto)
-    texto = "".join(c for c in texto if not unicodedata.combining(c))
-    texto = texto.lower()
-    # Troca qualquer sequência de espaços/quebras de linha por um único espaço
-    texto = re.sub(r"\s+", " ", texto).strip()
-    return texto
+def montar_modelos():
+    # Cada item: (id do arquivo, nome de exibição, modelo, grade de parâmetros)
+    # O prefixo "modelo__" indica que o parâmetro pertence ao passo "modelo" do Pipeline
+    return [
+        (
+            "regressao_logistica",
+            "Regressão Logística",
+            LogisticRegression(max_iter=5000, random_state=RANDOM_STATE),
+            {
+                "modelo__C": [0.1, 1, 10, 100],
+                "modelo__class_weight": [None, "balanced"],
+            },
+        ),
+        (
+            "svm",
+            "SVM (kernel RBF)",
+            SVC(kernel="rbf", random_state=RANDOM_STATE),
+            {
+                "modelo__C": [0.1, 1, 10, 100],
+                "modelo__gamma": ["scale", 0.01, 0.1],
+                "modelo__class_weight": [None, "balanced"],
+            },
+        ),
+        (
+            "random_forest",
+            "Random Forest",
+            RandomForestClassifier(random_state=RANDOM_STATE),
+            {
+                "modelo__n_estimators": [100, 300],
+                "modelo__max_depth": [None, 5, 10],
+                "modelo__min_samples_leaf": [1, 3],
+            },
+        ),
+        (
+            "gradient_boosting",
+            "Gradient Boosting",
+            GradientBoostingClassifier(random_state=RANDOM_STATE),
+            {
+                "modelo__n_estimators": [100, 200],
+                "modelo__learning_rate": [0.05, 0.1],
+                "modelo__max_depth": [2, 3],
+            },
+        ),
+    ]
 
 
 # ===================================
-# FEATURES VISUAIS (qualidade e aparência)
+# FUNÇÃO PARA CARREGAR OS DADOS
 # ===================================
-def extrair_features_visuais(original, padronizada):
-    altura, largura = original.shape[:2]
+def carregar_dados():
+    if not ARQUIVO_FEATURES.exists():
+        raise FileNotFoundError(
+            f"{ARQUIVO_FEATURES.name} não encontrado. Rode o extrator_features.py antes."
+        )
 
-    cinza = cv2.cvtColor(padronizada, cv2.COLOR_BGR2GRAY)
-    hsv = cv2.cvtColor(padronizada, cv2.COLOR_BGR2HSV)
+    tabela = pd.read_csv(ARQUIVO_FEATURES)
 
-    # Bordas detectadas pelo algoritmo de Canny (imagem preta com bordas brancas)
-    bordas = cv2.Canny(cinza, 100, 200)
+    y = tabela["classe"]
+    grupos = tabela["grupo"]
 
-    # Binarização de Otsu: separa "tinta" (escuro) do "papel" (claro)
-    _, tinta = cv2.threshold(
-        cinza, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU
+    # Features = todas as colunas numéricas, menos as que o usuário desligou
+    X = tabela.drop(columns=COLUNAS_NAO_FEATURES + COLUNAS_IGNORADAS, errors="ignore")
+    X = X.select_dtypes(include="number")
+
+    if X.isna().any().any():
+        colunas_com_nan = X.columns[X.isna().any()].tolist()
+        raise ValueError(f"Há valores ausentes nas colunas: {colunas_com_nan}")
+
+    print(f"Imagens: {len(X)} | Grupos (fotos originais): {grupos.nunique()}")
+    print(f"Features usadas ({X.shape[1]}): {', '.join(X.columns)}")
+    print("\nImagens por classe:")
+    print(y.value_counts().to_string())
+
+    return X, y, grupos
+
+
+# ===================================
+# FUNÇÃO PARA DIVIDIR TREINO E TESTE (POR GRUPO)
+# ===================================
+def dividir_treino_teste(X, y, grupos):
+    divisor = StratifiedGroupKFold(
+        n_splits=N_DOBRAS, shuffle=True, random_state=RANDOM_STATE
     )
 
-    return {
-        "largura": largura,
-        "altura": altura,
-        "proporcao": round(largura / altura, 4),
-        "brilho_medio": float(cinza.mean()),
-        "contraste": float(cinza.std()),
-        "nitidez": float(cv2.Laplacian(cinza, cv2.CV_64F).var()),
-        "densidade_bordas": float(np.count_nonzero(bordas) / bordas.size),
-        "prop_escuros": float(np.mean(cinza < 50)),
-        "prop_claros": float(np.mean(cinza > 200)),
-        "saturacao_media": float(hsv[:, :, 1].mean()),
-        "prop_tinta": float(np.count_nonzero(tinta) / tinta.size),
-    }
+    # Usamos apenas a primeira dobra como conjunto de teste (~20% dos grupos)
+    indices_treino, indices_teste = next(divisor.split(X, y, grupos))
 
+    X_treino, X_teste = X.iloc[indices_treino], X.iloc[indices_teste]
+    y_treino, y_teste = y.iloc[indices_treino], y.iloc[indices_teste]
+    g_treino, g_teste = grupos.iloc[indices_treino], grupos.iloc[indices_teste]
 
-# ===================================
-# OCR: LÊ O TEXTO E A CONFIANÇA DE CADA PALAVRA
-# ===================================
-def executar_ocr(padronizada):
-    cinza = cv2.cvtColor(padronizada, cv2.COLOR_BGR2GRAY)
+    # Garantia contra vazamento: nenhuma foto original pode estar nos dois conjuntos
+    repetidos = set(g_treino) & set(g_teste)
+    assert not repetidos, f"Vazamento de dados! Grupos nos dois conjuntos: {repetidos}"
 
-    dados = pytesseract.image_to_data(
-        cinza,
-        lang=IDIOMA_OCR,
-        output_type=Output.DICT,
-        timeout=TIMEOUT_OCR,
+    print(
+        f"\nTreino: {len(X_treino)} imagens ({g_treino.nunique()} grupos) | "
+        f"Teste: {len(X_teste)} imagens ({g_teste.nunique()} grupos)"
     )
+    print("Teste por classe:")
+    print(y_teste.value_counts().to_string())
 
-    palavras = []
-    confiancas = []
-
-    for texto, conf in zip(dados["text"], dados["conf"]):
-        texto = texto.strip()
-        conf = float(conf)
-
-        # conf = -1 indica que o bloco não é uma palavra (é só estrutura da página)
-        if texto and conf >= 0:
-            palavras.append(texto)
-            confiancas.append(conf)
-
-    return " ".join(palavras), confiancas
+    return X_treino, X_teste, y_treino, y_teste, g_treino
 
 
 # ===================================
-# FUNÇÃO PARA CONTAR PALAVRAS-CHAVE
+# FUNÇÃO PARA SALVAR A MATRIZ DE CONFUSÃO
 # ===================================
-def contar_palavras_chave(texto, palavras):
-    return sum(texto.count(palavra) for palavra in palavras)
-
-
-# ===================================
-# FEATURES DE TEXTO (a partir do OCR)
-# ===================================
-def extrair_features_texto(texto_bruto, confiancas):
-    texto = normalizar_texto(texto_bruto)
-    sem_espacos = texto.replace(" ", "")
-    total_caracteres = len(sem_espacos)
-    total_letras = sum(c.isalpha() for c in sem_espacos)
-
-    return {
-        "ocr_n_caracteres": total_caracteres,
-        "ocr_n_palavras": len(confiancas),
-        "ocr_conf_media": float(np.mean(confiancas)) if confiancas else 0.0,
-        "ocr_prop_letras": total_letras / total_caracteres if total_caracteres else 0.0,
-        "kw_nascimento": contar_palavras_chave(texto, PALAVRAS_NASCIMENTO),
-        "kw_casamento": contar_palavras_chave(texto, PALAVRAS_CASAMENTO),
-        "kw_certidao": contar_palavras_chave(texto, PALAVRAS_CERTIDAO),
-        "tem_frase_nascimento": int(FRASE_NASCIMENTO in texto),
-        "tem_frase_casamento": int(FRASE_CASAMENTO in texto),
-        # Texto guardado só para você conferir o que o OCR leu (não vira feature)
-        "ocr_texto": texto,
-    }
+def salvar_matriz_confusao(id_modelo, nome, y_real, y_previsto):
+    figura, eixo = plt.subplots(figsize=(6, 5))
+    ConfusionMatrixDisplay.from_predictions(
+        y_real, y_previsto, labels=CLASSES, cmap="Blues", ax=eixo
+    )
+    eixo.set_title(f"Matriz de confusão - {nome}")
+    eixo.set_xlabel("Classe prevista")
+    eixo.set_ylabel("Classe real")
+    figura.tight_layout()
+    caminho = PASTA_RESULTADOS / f"matriz_{id_modelo}.png"
+    figura.savefig(caminho, dpi=150)
+    plt.close(figura)
 
 
 # ===================================
-# FUNÇÃO PARA PROCESSAR UMA IMAGEM
+# FUNÇÃO PARA TREINAR E AVALIAR UM MODELO
 # ===================================
-def processar_imagem(caminho, classe):
-    original = ler_imagem(caminho)
-    if original is None:
-        raise ValueError("arquivo não pôde ser decodificado como imagem")
+def treinar_e_avaliar(id_modelo, nome, estimador, grade, dados):
+    X_treino, X_teste, y_treino, y_teste, g_treino = dados
 
-    padronizada = padronizar_largura(original, LARGURA_PADRAO)
+    print("\n===================================")
+    print(f" {nome.upper()}")
+    print("===================================")
 
-    # O nome do arquivo segue o padrão criado pelo gerador_imagens.py:
-    # classe_contador_tipo.jpg  ->  ex.: casamento_3_rotacao_positiva.jpg
-    partes = caminho.stem.split("_", 2)
-    grupo = "_".join(partes[:2])
-    variacao = partes[2] if len(partes) > 2 else "desconhecida"
-
-    texto_bruto, confiancas = executar_ocr(padronizada)
-
-    linha = {
-        "arquivo": caminho.name,
-        "classe": classe,
-        "grupo": grupo,
-        "variacao": variacao,
-    }
-    linha.update(extrair_features_visuais(original, padronizada))
-    linha.update(extrair_features_texto(texto_bruto, confiancas))
-    return linha
-
-
-# ===================================
-# FUNÇÃO PARA PROCESSAR UMA CLASSE
-# ===================================
-def processar_classe(classe):
-    print(f"\nProcessando classe: {classe.upper()}")
-
-    pasta_destino = PASTA_BASE / classe / f"{classe}Destino"
-
-    if not pasta_destino.exists():
-        print(f"Pasta não encontrada: {pasta_destino}")
-        return []
-
-    arquivos = sorted([
-        arquivo
-        for arquivo in pasta_destino.iterdir()
-        if arquivo.is_file()
-        and arquivo.suffix.lower() in EXTENSOES
+    # Pipeline: o escalonador é ajustado só com os dados de cada dobra de treino
+    pipeline = Pipeline([
+        ("escala", StandardScaler()),
+        ("modelo", estimador),
     ])
 
-    if not arquivos:
-        print("Nenhuma imagem encontrada.")
-        return []
+    validacao = StratifiedGroupKFold(
+        n_splits=N_DOBRAS, shuffle=True, random_state=RANDOM_STATE
+    )
 
-    linhas = []
+    busca = GridSearchCV(
+        pipeline,
+        param_grid=grade,
+        scoring="f1_macro",
+        cv=validacao,
+        n_jobs=-1,
+    )
+    busca.fit(X_treino, y_treino, groups=g_treino)
 
-    for posicao, arquivo in enumerate(arquivos, start=1):
-        try:
-            linhas.append(processar_imagem(arquivo, classe))
-            print(f"[{posicao}/{len(arquivos)}] {arquivo.name}")
-        except Exception as erro:
-            print(f"Erro ao processar {arquivo.name}: {erro}")
+    melhor = busca.best_estimator_
+    print(f"Melhores parâmetros: {busca.best_params_}")
+    print(f"F1 macro na validação cruzada: {busca.best_score_:.4f}")
 
-    return linhas
+    # Avaliação final no conjunto de teste (dados que o modelo nunca viu)
+    previsto = melhor.predict(X_teste)
+
+    print("\nRelatório por classe (conjunto de teste):")
+    print(classification_report(
+        y_teste, previsto, labels=CLASSES, digits=4, zero_division=0
+    ))
+
+    matriz = confusion_matrix(y_teste, previsto, labels=CLASSES)
+    print("Matriz de confusão (linhas = real, colunas = previsto):")
+    print(pd.DataFrame(
+        matriz,
+        index=[f"real_{c}" for c in CLASSES],
+        columns=[f"prev_{c}" for c in CLASSES],
+    ).to_string())
+
+    salvar_matriz_confusao(id_modelo, nome, y_teste, previsto)
+
+    recalls = recall_score(
+        y_teste, previsto, labels=CLASSES, average=None, zero_division=0
+    )
+
+    resultado = {
+        "modelo": nome,
+        "acuracia": accuracy_score(y_teste, previsto),
+        "precision_macro": precision_score(
+            y_teste, previsto, labels=CLASSES, average="macro", zero_division=0
+        ),
+        "recall_macro": recall_score(
+            y_teste, previsto, labels=CLASSES, average="macro", zero_division=0
+        ),
+        "f1_macro": f1_score(
+            y_teste, previsto, labels=CLASSES, average="macro", zero_division=0
+        ),
+        "recall_minimo": float(recalls.min()),
+    }
+    for classe, valor in zip(CLASSES, recalls):
+        resultado[f"recall_{classe}"] = float(valor)
+    resultado["atende_recall_minimo"] = bool(recalls.min() >= RECALL_MINIMO)
+    resultado["parametros"] = str(busca.best_params_)
+
+    return resultado, melhor
 
 
 # ===================================
-# VERIFICA SE O TESSERACT ESTÁ PRONTO
+# FUNÇÃO PARA MOSTRAR A IMPORTÂNCIA DAS FEATURES
 # ===================================
-def verificar_tesseract():
-    try:
-        versao = pytesseract.get_tesseract_version()
-        idiomas = pytesseract.get_languages()
-    except pytesseract.TesseractNotFoundError:
-        print("Tesseract não encontrado. Instale-o e confira CAMINHO_TESSERACT.")
-        return False
+def mostrar_importancias(pipeline, nomes_features):
+    modelo = pipeline.named_steps["modelo"]
+    if not hasattr(modelo, "feature_importances_"):
+        return
 
-    programa = pytesseract.pytesseract.tesseract_cmd
-    print(f"Programa usado: {programa}")
-    print(f"Idiomas instalados: {', '.join(idiomas)}")
-
-    if IDIOMA_OCR not in idiomas:
-        print(f"Idioma '{IDIOMA_OCR}' não instalado no Tesseract.")
-        return False
-
-    print(f"Tesseract {versao} pronto (idioma: {IDIOMA_OCR}).")
-    return True
+    importancias = pd.Series(modelo.feature_importances_, index=nomes_features)
+    print("\nFeatures mais importantes do modelo escolhido:")
+    print(importancias.sort_values(ascending=False).head(10).round(4).to_string())
 
 
 # ===================================
@@ -288,39 +275,62 @@ def verificar_tesseract():
 # ===================================
 def main():
     print("===================================")
-    print(" EXTRATOR DE FEATURES - LeitorDocs")
+    print(" TREINAMENTO - LEITORDOCS")
     print("===================================")
 
-    if not verificar_tesseract():
-        return
+    PASTA_RESULTADOS.mkdir(exist_ok=True)
+    PASTA_MODELOS.mkdir(exist_ok=True)
 
-    todas_as_linhas = []
+    X, y, grupos = carregar_dados()
+    dados = dividir_treino_teste(X, y, grupos)
 
-    for classe in CLASSES:
-        todas_as_linhas.extend(processar_classe(classe))
+    resultados = []
+    modelos_treinados = {}
 
-    if not todas_as_linhas:
-        print("Nenhuma feature extraída.")
-        return
+    for id_modelo, nome, estimador, grade in montar_modelos():
+        resultado, melhor = treinar_e_avaliar(id_modelo, nome, estimador, grade, dados)
+        resultados.append(resultado)
+        modelos_treinados[nome] = melhor
 
-    tabela = pd.DataFrame(todas_as_linhas)
-    tabela.to_csv(ARQUIVO_SAIDA, index=False, encoding="utf-8")
+    # Ranking: 1º recall mínimo entre as classes, 2º F1 macro, 3º acurácia
+    tabela = pd.DataFrame(resultados).sort_values(
+        by=["recall_minimo", "f1_macro", "acuracia"], ascending=False
+    )
+    tabela.to_csv(PASTA_RESULTADOS / "comparacao_modelos.csv", index=False)
 
-    print("\n===================================")
-    print(" EXTRAÇÃO FINALIZADA")
-    print("===================================")
-    print(f"Imagens processadas: {len(tabela)}")
-    print(f"Arquivo salvo em: {ARQUIVO_SAIDA}")
-
-    # Média de algumas features por classe: mostra se elas ajudam a separar as classes
-    colunas_resumo = [
-        "nitidez", "brilho_medio", "ocr_conf_media", "ocr_n_palavras",
-        "kw_nascimento", "kw_casamento", "tem_frase_nascimento", "tem_frase_casamento",
+    colunas_exibir = [
+        "modelo", "acuracia", "precision_macro", "recall_macro", "f1_macro",
+        "recall_minimo", "atende_recall_minimo",
     ]
     pd.set_option("display.width", 200)
     pd.set_option("display.max_columns", None)
-    print("\nMédia por classe:")
-    print(tabela.groupby("classe")[colunas_resumo].mean().round(2))
+    print("\n===================================")
+    print(" COMPARAÇÃO DOS MODELOS (conjunto de teste)")
+    print("===================================")
+    print(tabela[colunas_exibir].round(4).to_string(index=False))
+
+    melhor_nome = tabela.iloc[0]["modelo"]
+    melhor_modelo = modelos_treinados[melhor_nome]
+    print(f"\nMelhor modelo: {melhor_nome}")
+
+    if tabela.iloc[0]["atende_recall_minimo"]:
+        print(f"Atende ao recall mínimo de {RECALL_MINIMO:.0%} em todas as classes.")
+    else:
+        print(f"NÃO atinge o recall mínimo de {RECALL_MINIMO:.0%} em todas as classes.")
+
+    mostrar_importancias(melhor_modelo, list(X.columns))
+
+    caminho_modelo = PASTA_MODELOS / "modelo_final.joblib"
+    joblib.dump(
+        {
+            "pipeline": melhor_modelo,
+            "features": list(X.columns),
+            "classes": CLASSES,
+        },
+        caminho_modelo,
+    )
+    print(f"\nModelo salvo em: {caminho_modelo}")
+    print(f"Resultados salvos em: {PASTA_RESULTADOS}")
 
 
 # ===================================
