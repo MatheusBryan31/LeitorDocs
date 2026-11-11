@@ -10,8 +10,9 @@ Classificador de documentos com Machine Learn para automatizar a triagem de cert
 - [Objetivo](#objetivo)
 - [Classes do modelo](#classes-do-modelo)
 - [Preparação do dataset](#preparação-do-dataset)
-- [Extração das features](#extração-das-features)
 - [Extração de features](#extração-de-features)
+- [Treinamento e avaliação](#treinamento-e-avaliação)
+- [Resultados](#resultados)
 - [Tecnologias utilizadas](#tecnologias-utilizadas)
 - [Estrutura das pastas](#estrutura-das-pastas)
 - [Instalação](#instalação)
@@ -47,7 +48,7 @@ Antes da criação do modelo, foi necessário reunir e tratar os dados.
 
 > **O que é Data Augmentation?** É a técnica de recriar uma imagem em outros ângulos e tons, ampliando o dataset sem a necessidade de coletar novos dados.
 
-## Extração das features
+## Extração de features
 
 Os modelos de classificação trabalham com dados estruturados, então cada imagem é transformada em uma linha de números(features) salva em `features.csv`.
 
@@ -62,6 +63,46 @@ Para gerar a tabela:
 python extrator_features.py
 ```
 
+## Treinamento e avaliação
+
+### Divisão dos dados
+
+Os dados são separados em treino (80%) e teste (20%) **por grupo**: todas as variações geradas
+
+### Modelos comparados
+
+| Modelo | Família |
+| ------ | ------- |
+| Regressão Logística | Linear |
+| SVM (kernel RBF) | Baseado em margem |
+| Random Forest | Conjunto de árvores (bagging) |
+| Gradient Boosting | Conjunto de árvores (boosting) |
+
+Os parâmetros de cada modelo foram ajustados com `GridSearchCV` e avaliação cruzada com cinco dobras
+
+### Métricas
+
+Acurácia, precisão, recall e F1 (por classe e macro) e matriz de confusão. **Critério do projeto**
+
+### Como executar
+
+```bash
+python treinar_modelos.py
+```
+
+## Resultados
+
+_Preencher após a execução._
+
+| Modelo | Acurácia | F1 macro | Recall mínimo | Atende 97%? |
+| ------ | -------- | -------- | ------------- | ----------- |
+| Regressão Logística | | | | |
+| SVM (kernel RBF) | | | | |
+| Random Forest | | | | |
+| Gradient Boosting | | | | |
+
+**Modelo escolhido:** _a definir, com a justificativa_. 
+
 ## Tecnologias utilizadas
 
 - Python 3.13.17
@@ -69,28 +110,36 @@ python extrator_features.py
 - [OpenCV](https://opencv.org/): medição de nitidez, bordas e contraste
 - [NumPy](https://numpy.org/) e [pandas](https://pandas.pydata.org/): cálculos e tabela de features
 - [Tesseract OCR](https://github.com/tesseract-ocr/tesseract) e [pytesseract](https://pypi.org/project/pytesseract/): leitura do texto dos documentos
+- [scikit-learn](https://scikit-learn.org/): treinamento e avaliação dos modelos
+- [matplotlib](https://matplotlib.org/): geração das matrizes de confusão
 
 ## Estrutura das pastas
 
 ```text
 LeitorDocs/
-├──src/
-|    └───assets/
-|        └───imagens/
-|            ├───casamento/
-|            │   ├───casamentoDestino/
-|            │   └───casamentoOrigem/
-|            ├───nascimento/
-|            │   ├───nascimentoDestino/
-|            │   └───nascimentoOrigem/
-|            └───outros/
-|                ├───outrosDestino/
-|                └───outrosOrigem/
+├── src/
+|    └─── assets/
+|        └─── imagens/
+|            ├─── casamento/
+|            │   ├─── casamentoDestino/
+|            │   └─── casamentoOrigem/
+|            ├─── nascimento/
+|            │   ├─── nascimentoDestino/
+|            │   └─── nascimentoOrigem/
+|            └─── outros/
+|                ├─── outrosDestino/
+|                └─── outrosOrigem/
 ├── gerador_imagens.py
 ├── README.md
 ├── extrator_features.py
 ├── requirements.txt
-└── .gitignore
+├── .gitignore
+├── treinar_modelos.py
+├── resultados/
+|   ├── comparacao_modelos.csv
+|   └── matriz_<modelo>.png
+└── modelos/
+    └── modelo_final.joblib
 ```
 | Caminho              | Descrição                                                                 |
 | -------------------- | ------------------------------------------------------------------------- |
@@ -152,6 +201,7 @@ from pathlib import Path
 - [x] Script de Data Augmentation
 - [x] Script de extração das features
 - [ ] Treinamento do modelo
+- [ ] Validação do recall mínimo de 97% por classe
 - [ ] Avaliação do modelo
 - [ ] Integração com o fluxo de matrículas e inscrições
 
