@@ -321,3 +321,9 @@ def main():
         )
         print(f"\nModelo salvo em : {camiho_modelo}")
         print(f"Resultados salvos em: {PASTA_RESULTADOS}")
+
+# ===================================================
+# EXECUÇÃO DO PROGRAMA
+# ===================================================
+if __name__ == "__main__":
+    main()
