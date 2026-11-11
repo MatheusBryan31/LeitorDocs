@@ -44,7 +44,7 @@ Ler os documentos recebidos e distinguir, entre eles, quais são certidões de n
 Antes da criação do modelo, foi necessário reunir e tratar os dados.
 
 - **Dados originais:** 30 imagens de cada classe.
-- **Data Augmentation:** Para cada imagem original, são geradas cinco novas imagens com ângulo e clareza diferentes, aumentando a variabilidade do dataset.
+- **Data Augmentation:** Para cada imagem original, são geradas quatro novas imagens com ângulo e clareza diferentes, aumentando a variabilidade do dataset.
 
 > **O que é Data Augmentation?** É a técnica de recriar uma imagem em outros ângulos e tons, ampliando o dataset sem a necessidade de coletar novos dados.
 
@@ -92,16 +92,15 @@ python treinar_modelos.py
 
 ## Resultados
 
-_Preencher após a execução._
 
 | Modelo | Acurácia | F1 macro | Recall mínimo | Atende 97%? |
 | ------ | -------- | -------- | ------------- | ----------- |
-| Regressão Logística | | | | |
-| SVM (kernel RBF) | | | | |
-| Random Forest | | | | |
-| Gradient Boosting | | | | |
+| Regressão Logística | 58% | 58% | 50% | Não |
+| SVM (kernel RBF) | 67% | 67% | 53% | Não |
+| Random Forest | 71% | 71% | 56% | Não |
+| Gradient Boosting | 68% | 68% | 60% | Não |
 
-**Modelo escolhido:** _a definir, com a justificativa_. 
+**Modelo escolhido:** Foi identificado muito ruído no modelo, não sendo assim possível escolher um para implementação. Apenas houve um modelo que teve um melhor desempenho - Gradient Boosting.
 
 ## Tecnologias utilizadas
 
@@ -200,9 +199,8 @@ from pathlib import Path
 - [x] Coleta das imagens originais
 - [x] Script de Data Augmentation
 - [x] Script de extração das features
-- [ ] Treinamento do modelo
+- [x] Treinamento do modelo
 - [ ] Validação do recall mínimo de 97% por classe
 - [ ] Avaliação do modelo
-- [ ] Integração com o fluxo de matrículas e inscrições
 
 > Este README está em desenvolvimento e será atualizado conforme o projeto avança.
