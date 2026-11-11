@@ -248,3 +248,15 @@ def treinar_e_avaliar(id_modelo, nome, estimador, grade, dados):
     resultado["parametros"] = str(busca.best_params_)
 
     return resultado, melhor
+
+# ===================================================
+# FUNÇÃO PARA MOSTRAR A IMPORTÂNCIA DAS FEATURES
+# ===================================================
+def mostrar_importancias(pipeline, nomes_features):
+    modelo = pipeline.named_steps["modelo"]
+    if not hasattr(modelo, "feature_importances_"):
+        return
+
+    importancias = pd.Series(modelo.feature_importances_, index = nomes_features)
+    print("\nFeatures mais importantes do modelo escolhido:")
+    print(importancias.sort_values(ascending = False).head(10).round(4).to_string())
